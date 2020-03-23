@@ -37,6 +37,7 @@ import { Search } from './modules/search/search.entity';
 import { SearchModule } from './modules/search/search.module';
 // 配置文件
 import { config } from './config';
+import { ConfigModule } from './config/config.module';
 
 @Module({
   imports: [
@@ -70,6 +71,7 @@ import { config } from './config';
     PageModule,
     ViewModule,
     SearchModule,
+    ConfigModule,
   ],
   controllers: [],
   providers: [],
