@@ -11,8 +11,7 @@ export class UserService {
         @InjectRepository(User)
         private readonly userRepository: Repository<User>,
     ) {
-        const name: string = this.configService.get('ADMIN_NAME');
-        const password: string = this.configService.get('ADMIN_PW');
+        const {name, password} = this.configService.get('admin');
         this.createUser({name, password, role: 'admin'})
             .then(_ => {
                 console.log();
