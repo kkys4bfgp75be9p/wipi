@@ -20,8 +20,16 @@ export class ConfigService {
     }
 
     // 可以写方法处理env变量，这样也比较好除错
-    getDbPassword() {
-        return this.envConfig.DB_PW;
+    getDbConfig() {
+        const config = this.envConfig;
+        return {
+            host: config.DB_HOST,
+            port: config.DB_PORT,
+            username: config.DB_USERNAME,
+            password: config.DB_PW,
+            database: config.DB_NAME,
+            charset: config.DB_CHARSET,
+        };
     }
 
 }
