@@ -24,7 +24,7 @@ export class ConfigService {
         const config = this.envConfig;
         return {
             host: config.DB_HOST,
-            port: config.DB_PORT,
+            port: Number(config.DB_PORT),
             username: config.DB_USERNAME,
             password: config.DB_PW,
             database: config.DB_NAME,
