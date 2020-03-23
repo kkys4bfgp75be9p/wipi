@@ -40,14 +40,11 @@ import {ConfigModule, ConfigService} from './config';
 
 @Module({
     imports: [
-      ConfigModule,
-      TypeOrmModule.forRootAsync({
-          imports: [ConfigModule],
-          inject: [ConfigService],
-          useFactory: async (configService: ConfigService) => ({
-            type: 'mysql',
-            ...this.configService.getDbConfig(),
-          }),
+        ConfigModule,
+        TypeOrmModule.forRootAsync({
+            imports: [ConfigModule],
+            inject: [ConfigService],
+            useFactory: async (configService: ConfigService) => (configService.getDbConfig()),
         }),
         UserModule,
         FileModule,
