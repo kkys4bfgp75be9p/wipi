@@ -31,4 +31,4 @@ RUN npm run build
 
 EXPOSE 4000
 
-CMD node dist/main
+CMD pm2-runtime start npm --name server -- start
