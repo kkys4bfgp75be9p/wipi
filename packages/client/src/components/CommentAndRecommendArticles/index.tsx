@@ -1,8 +1,8 @@
 import React from "react";
-import { NextPage } from "next";
+import {NextPage} from "next";
 import cls from "classnames";
-import { MyComment } from "@/components/Comment";
-import { RecommendArticles } from "@components/RecommendArticles";
+import {MyComment} from "@/components/Comment";
+import {RecommendArticles} from "@components/RecommendArticles";
 import style from "./index.module.scss";
 
 interface IProps {
@@ -12,10 +12,10 @@ interface IProps {
 }
 
 export const CommentAndRecommendArticles: NextPage<IProps> = ({
-  articleId,
-  pageId,
-  isCommentable
-}) => {
+                                                                articleId,
+                                                                pageId,
+                                                                isCommentable
+                                                              }) => {
   return (
     <div className={cls(style.wrapper)}>
       {/* S 评论 */}

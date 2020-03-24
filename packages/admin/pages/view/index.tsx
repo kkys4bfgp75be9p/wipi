@@ -1,20 +1,21 @@
-import React, { useState, useCallback } from 'react';
-import { NextPage } from 'next';
-import { Badge, Popconfirm, Divider, Modal, Descriptions, message } from 'antd';
+import React, {useState, useCallback} from 'react';
+import {NextPage} from 'next';
+import {Badge, Popconfirm, Divider, Modal, Descriptions, message} from 'antd';
 import * as dayjs from 'dayjs';
 import UAParser from 'ua-parser-js';
-import { AdminLayout } from '@/layout/AdminLayout';
-import { ViewProvider } from '@/providers/view';
-import { SPTDataTable } from '@/components/SPTDataTable';
+import {AdminLayout} from '@/layout/AdminLayout';
+import {ViewProvider} from '@/providers/view';
+import {SPTDataTable} from '@/components/SPTDataTable';
 import style from './index.module.scss';
 
-function showInfo({ title, content }) {
+function showInfo({title, content}) {
   Modal.info({
     title,
     icon: null,
     content,
     okText: '确认',
-    onOk() {},
+    onOk() {
+    },
   });
 }
 
@@ -37,10 +38,10 @@ const parseIp = (ip, userAgent) => {
     <Descriptions.Item label="设备">
       {uaInfo.device.vendor
         ? uaInfo.device.vendor +
-          ' ' +
-          uaInfo.device.model +
-          ' ' +
-          uaInfo.device.type
+        ' ' +
+        uaInfo.device.model +
+        ' ' +
+        uaInfo.device.type
         : '未知设备'}
     </Descriptions.Item>,
   ];
@@ -52,7 +53,7 @@ const parseIp = (ip, userAgent) => {
         <Descriptions
           title={null}
           bordered
-          column={{ xxl: 1, xl: 1, lg: 1, md: 1, sm: 1, xs: 1 }}
+          column={{xxl: 1, xl: 1, lg: 1, md: 1, sm: 1, xs: 1}}
         >
           {content}
         </Descriptions>
@@ -137,7 +138,7 @@ const Views: NextPage = () => {
           count={views}
           showZero={true}
           overflowCount={Infinity}
-          style={{ backgroundColor: '#52c41a' }}
+          style={{backgroundColor: '#52c41a'}}
         />
       ),
     },
@@ -161,7 +162,7 @@ const Views: NextPage = () => {
         >
           解析
         </a>
-        <Divider type="vertical" />
+        <Divider type="vertical"/>
         <Popconfirm
           title="确认删除这个访问？"
           onConfirm={() => deleteView(record.id)}

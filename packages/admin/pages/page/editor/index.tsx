@@ -1,12 +1,13 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, {useState, useEffect, useCallback, useRef} from 'react';
 import cls from 'classnames';
-import { NextPage } from 'next';
-import { Button, Input, message, PageHeader, Icon, Drawer } from 'antd';
-import { Editor as CKEditor } from '@components/Editor';
-import { FileSelectDrawer } from '@/components/FileSelectDrawer';
-import { PageProvider } from '@providers/page';
-import { useSetting } from '@/hooks/useSetting';
+import {NextPage} from 'next';
+import {Button, Input, message, PageHeader, Icon, Drawer} from 'antd';
+import {Editor as CKEditor} from '@components/Editor';
+import {FileSelectDrawer} from '@/components/FileSelectDrawer';
+import {PageProvider} from '@providers/page';
+import {useSetting} from '@/hooks/useSetting';
 import style from './index.module.scss';
+
 const url = require('url');
 
 const Editor: NextPage = () => {
@@ -163,7 +164,7 @@ const Editor: NextPage = () => {
           }}
         />
         <Input
-          style={{ marginTop: 16 }}
+          style={{marginTop: 16}}
           placeholder="请配置页面路径"
           defaultValue={page.path}
           onChange={e => {

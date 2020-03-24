@@ -1,14 +1,15 @@
-import React, { useState, useRef, useCallback, useEffect } from 'react';
+import React, {useState, useRef, useCallback, useEffect} from 'react';
 import cls from 'classnames';
-import { NextPage } from 'next';
+import {NextPage} from 'next';
 import Router from 'next/router';
-import { Button, Input, message, PageHeader } from 'antd';
-import { Editor as CKEditor } from '@components/Editor';
-import { FileSelectDrawer } from '@/components/FileSelectDrawer';
-import { ArticleSettingDrawer } from '@/components/ArticleSettingDrawer';
-import { ArticleProvider } from '@providers/article';
-import { useSetting } from '@/hooks/useSetting';
+import {Button, Input, message, PageHeader} from 'antd';
+import {Editor as CKEditor} from '@components/Editor';
+import {FileSelectDrawer} from '@/components/FileSelectDrawer';
+import {ArticleSettingDrawer} from '@/components/ArticleSettingDrawer';
+import {ArticleProvider} from '@providers/article';
+import {useSetting} from '@/hooks/useSetting';
 import style from './index.module.scss';
+
 const url = require('url');
 
 const Editor: NextPage = () => {

@@ -1,5 +1,5 @@
-import { Form, Row, Input, Button } from 'antd';
-import { FormComponentProps } from 'antd/es/form';
+import {Form, Row, Input, Button} from 'antd';
+import {FormComponentProps} from 'antd/es/form';
 import style from './index.module.scss';
 
 interface IFieldItem {
@@ -16,11 +16,11 @@ interface IProps extends FormComponentProps {
   onReset?: (arg: any) => void;
 }
 
-const _Search: React.FC<IProps> = ({ form, fields = [], onSearch }) => {
+const _Search: React.FC<IProps> = ({form, fields = [], onSearch}) => {
   const getFields = () => {
     const count = 6;
 
-    const { getFieldDecorator } = form;
+    const {getFieldDecorator} = form;
     const children = [];
     for (let field of fields) {
       children.push(
@@ -32,7 +32,7 @@ const _Search: React.FC<IProps> = ({ form, fields = [], onSearch }) => {
             field.children ? (
               field.children
             ) : (
-              <Input width={180} placeholder={field.msg || 'placeholder'} />
+              <Input width={180} placeholder={field.msg || 'placeholder'}/>
             )
           )}
         </Form.Item>
@@ -62,7 +62,7 @@ const _Search: React.FC<IProps> = ({ form, fields = [], onSearch }) => {
           <Button type="primary" htmlType="submit">
             搜索
           </Button>
-          <Button style={{ marginLeft: 8 }} onClick={handleReset}>
+          <Button style={{marginLeft: 8}} onClick={handleReset}>
             重置
           </Button>
         </Form.Item>
@@ -72,4 +72,4 @@ const _Search: React.FC<IProps> = ({ form, fields = [], onSearch }) => {
   );
 };
 
-export const Search = Form.create<IProps>({ name: 'advanced_search' })(_Search);
+export const Search = Form.create<IProps>({name: 'advanced_search'})(_Search);

@@ -1,21 +1,22 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, {useState, useEffect, useCallback, useRef} from 'react';
 import cls from 'classnames';
-import { NextPage } from 'next';
+import {NextPage} from 'next';
 import Router from 'next/router';
-import { Button, Input, message, PageHeader } from 'antd';
-import { Editor as CKEditor } from '@components/Editor';
-import { FileSelectDrawer } from '@/components/FileSelectDrawer';
-import { ArticleSettingDrawer } from '@/components/ArticleSettingDrawer';
-import { ArticleProvider } from '@providers/article';
-import { useSetting } from '@/hooks/useSetting';
+import {Button, Input, message, PageHeader} from 'antd';
+import {Editor as CKEditor} from '@components/Editor';
+import {FileSelectDrawer} from '@/components/FileSelectDrawer';
+import {ArticleSettingDrawer} from '@/components/ArticleSettingDrawer';
+import {ArticleProvider} from '@providers/article';
+import {useSetting} from '@/hooks/useSetting';
 import style from './index.module.scss';
+
 const url = require('url');
 
 interface IProps {
   id: any;
 }
 
-const Editor: NextPage<IProps> = ({ id }) => {
+const Editor: NextPage<IProps> = ({id}) => {
   const setting = useSetting();
   const [fileDrawerVisible, setFileDrawerVisible] = useState(false);
   const [settingDrawerVisible, setSettingDrawerVisible] = useState(false);
@@ -165,8 +166,8 @@ const Editor: NextPage<IProps> = ({ id }) => {
 };
 
 Editor.getInitialProps = async ctx => {
-  const { id } = ctx.query;
-  return { id };
+  const {id} = ctx.query;
+  return {id};
 };
 
 export default Editor;

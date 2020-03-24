@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import {useRouter} from "next/router";
 import cls from "classnames";
-import { Search } from "@/components/Search";
+import {Search} from "@/components/Search";
 import style from "./index.module.scss";
 
 function throttle(fn, threshhold) {
@@ -10,14 +10,14 @@ function throttle(fn, threshhold) {
   var timer;
   threshhold || (threshhold = 250);
 
-  return function() {
+  return function () {
     var context = this;
     var args = arguments;
     var now = +new Date();
 
     if (last && now < last + threshhold) {
       clearTimeout(timer);
-      timer = setTimeout(function() {
+      timer = setTimeout(function () {
         last = now;
         fn.apply(context, args);
       }, threshhold);
@@ -28,7 +28,7 @@ function throttle(fn, threshhold) {
   };
 }
 
-export const _Header = ({ setting, menus }) => {
+export const _Header = ({setting, menus}) => {
   const router = useRouter();
   const asPath = router.asPath;
   const pathname = router.pathname;
@@ -68,12 +68,12 @@ export const _Header = ({ setting, menus }) => {
             {/^http/.test(setting.systemLogo) ? (
               <Link href="/">
                 <a>
-                  <img src={setting.systemLogo} alt="" />
+                  <img src={setting.systemLogo} alt=""/>
                 </a>
               </Link>
             ) : (
               <Link href="/">
-                <a dangerouslySetInnerHTML={{ __html: setting.systemLogo }}></a>
+                <a dangerouslySetInnerHTML={{__html: setting.systemLogo}}></a>
               </Link>
             )}
           </div>
@@ -94,9 +94,9 @@ export const _Header = ({ setting, menus }) => {
                   key={menu.label}
                   className={cls({
                     [style.active]:
-                      pathname === menu.path ||
-                      asPath === menu.path ||
-                      (menu.dynamicPath && pathname === menu.dynamicPath)
+                    pathname === menu.path ||
+                    asPath === menu.path ||
+                    (menu.dynamicPath && pathname === menu.dynamicPath)
                   })}
                 >
                   {/page/.test(menu.path) ? (
@@ -119,7 +119,7 @@ export const _Header = ({ setting, menus }) => {
             </ul>
           </nav>
 
-          <Search visible={showSearch} onClose={() => setShowSearch(false)} />
+          <Search visible={showSearch} onClose={() => setShowSearch(false)}/>
         </div>
       </div>
     </header>

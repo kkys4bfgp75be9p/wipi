@@ -1,5 +1,5 @@
-import React, { useState, useCallback, useRef } from 'react';
-import { NextPage } from 'next';
+import React, {useState, useCallback, useRef} from 'react';
+import {NextPage} from 'next';
 import Link from 'next/link';
 import {
   Row,
@@ -17,16 +17,16 @@ import {
 } from 'antd';
 import * as dayjs from 'dayjs';
 import Viewer from 'viewerjs';
-import { AdminLayout } from '@/layout/AdminLayout';
-import { useSetting } from '@/hooks/useSetting';
-import { FileProvider } from '@providers/file';
-import { SPTDataTable } from '@/components/SPTDataTable';
+import {AdminLayout} from '@/layout/AdminLayout';
+import {useSetting} from '@/hooks/useSetting';
+import {FileProvider} from '@providers/file';
+import {SPTDataTable} from '@/components/SPTDataTable';
 import style from './index.module.scss';
 
-const { Meta } = Card;
-const { Dragger } = Upload;
+const {Meta} = Card;
+const {Dragger} = Upload;
 
-const DescriptionItem = ({ title, content }) => (
+const DescriptionItem = ({title, content}) => (
   <div className={style.description}>
     <p>{title}:</p>
     <div>{content}</div>
@@ -53,7 +53,7 @@ const copy = value => {
 
 let viewer: any = null;
 
-const File: NextPage<IFileProps> = ({ files: defaultFiles = [], total }) => {
+const File: NextPage<IFileProps> = ({files: defaultFiles = [], total}) => {
   const ref = useRef();
   const setting = useSetting();
   const [loading, setLoading] = useState<boolean>(false);
@@ -115,7 +115,7 @@ const File: NextPage<IFileProps> = ({ files: defaultFiles = [], total }) => {
     <AdminLayout>
       <div className={style.wrapper}>
         {!isOSSSettingFullFiled ? (
-          <div style={{ marginBottom: 24 }}>
+          <div style={{marginBottom: 24}}>
             <Alert
               message={
                 <span>
@@ -129,11 +129,11 @@ const File: NextPage<IFileProps> = ({ files: defaultFiles = [], total }) => {
             />
           </div>
         ) : (
-          <div style={{ marginBottom: 24 }}>
+          <div style={{marginBottom: 24}}>
             <Spin tip="文件上传中..." spinning={loading}>
               <Upload.Dragger {...uploadProps}>
                 <p className="ant-upload-drag-icon">
-                  <Icon type="inbox" />
+                  <Icon type="inbox"/>
                 </p>
                 <p className="ant-upload-text">
                   点击选择文件或将文件拖拽到此处
@@ -182,7 +182,7 @@ const File: NextPage<IFileProps> = ({ files: defaultFiles = [], total }) => {
                     hoverable
                     cover={
                       <div className={style.preview}>
-                        <img alt={file.originalname} src={file.url} />
+                        <img alt={file.originalname} src={file.url}/>
                       </div>
                     }
                     onClick={() => {
@@ -190,7 +190,7 @@ const File: NextPage<IFileProps> = ({ files: defaultFiles = [], total }) => {
                       setVisible(true);
                       Promise.resolve().then(() => {
                         if (!viewer) {
-                          viewer = new Viewer(ref.current, { inline: false });
+                          viewer = new Viewer(ref.current, {inline: false});
                         } else {
                           viewer.update();
                         }
@@ -323,8 +323,8 @@ const File: NextPage<IFileProps> = ({ files: defaultFiles = [], total }) => {
 };
 
 File.getInitialProps = async () => {
-  const files = await FileProvider.getFiles({ page: 1, pageSize: 12 });
-  return { files: files[0], total: files[1] };
+  const files = await FileProvider.getFiles({page: 1, pageSize: 12});
+  return {files: files[0], total: files[1]};
 };
 
 export default File;

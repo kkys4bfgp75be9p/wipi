@@ -1,5 +1,5 @@
-import React, { useState, useCallback, useMemo } from 'react';
-import { NextPage } from 'next';
+import React, {useState, useCallback, useMemo} from 'react';
+import {NextPage} from 'next';
 import {
   Row,
   Col,
@@ -12,15 +12,15 @@ import {
   message,
 } from 'antd';
 import cls from 'classnames';
-import { AdminLayout } from '@/layout/AdminLayout';
-import { TagProvider } from '@providers/tag';
+import {AdminLayout} from '@/layout/AdminLayout';
+import {TagProvider} from '@providers/tag';
 import style from './index.module.scss';
 
 interface ITagProps {
   tags: ITag[];
 }
 
-const TagPage: NextPage<ITagProps> = ({ tags: defaultTags = [] }) => {
+const TagPage: NextPage<ITagProps> = ({tags: defaultTags = []}) => {
   const [tags, setTags] = useState(defaultTags);
   const [mode, setMode] = useState('create');
   const [currentTag, setCurrentTag] = useState(null);
@@ -101,7 +101,7 @@ const TagPage: NextPage<ITagProps> = ({ tags: defaultTags = [] }) => {
               className={cls(style.btns, isCreateMode ? false : style.isEdit)}
             >
               {isCreateMode ? (
-                <Button type="primary" onClick={() => addTag({ label, value })}>
+                <Button type="primary" onClick={() => addTag({label, value})}>
                   保存
                 </Button>
               ) : (
@@ -164,7 +164,7 @@ const TagPage: NextPage<ITagProps> = ({ tags: defaultTags = [] }) => {
 
 TagPage.getInitialProps = async () => {
   const tags = await TagProvider.getTags();
-  return { tags };
+  return {tags};
 };
 
 export default TagPage;

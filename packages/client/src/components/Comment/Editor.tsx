@@ -1,18 +1,19 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Button, Input, message } from 'antd';
+import React, {useState, useEffect, useRef} from 'react';
+import {Button, Input, message} from 'antd';
 import cls from 'classnames';
-import { CommentProvider } from '@providers/comment';
-import { BfEditor } from './BfEditor';
+import {CommentProvider} from '@providers/comment';
+import {BfEditor} from './BfEditor';
 import style from './index.module.scss';
 
 export const Editor = ({
-  hostId,
-  isHostInPage = false,
-  parentComment,
-  replyComment,
-  renderFooter = null,
-  onSuccess = () => {},
-}) => {
+                         hostId,
+                         isHostInPage = false,
+                         parentComment,
+                         replyComment,
+                         renderFooter = null,
+                         onSuccess = () => {
+                         },
+                       }) => {
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -26,7 +27,8 @@ export const Editor = ({
       userInfo = JSON.parse(userInfo);
       setName(userInfo.name);
       setEmail(userInfo.email);
-    } catch (err) {}
+    } catch (err) {
+    }
   }, [loading]);
 
   useEffect(() => {
@@ -60,7 +62,7 @@ export const Editor = ({
     // 父级评论 id
     if (parentComment) {
       if (parentComment.id) {
-        Object.assign(data, { parentCommentId: parentComment.id });
+        Object.assign(data, {parentCommentId: parentComment.id});
       }
     }
 
@@ -82,9 +84,10 @@ export const Editor = ({
         userInfo = JSON.parse(userInfo);
         window.localStorage.setItem(
           'user',
-          JSON.stringify(Object.assign(userInfo, { name, email }))
+          JSON.stringify(Object.assign(userInfo, {name, email}))
         );
-      } catch (err) {}
+      } catch (err) {
+      }
       onSuccess();
     });
   };

@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { Drawer, Button, Input, Switch, Select } from 'antd';
-import { FileSelectDrawer } from '@/components/FileSelectDrawer';
-import { CategoryProvider } from '@/providers/category';
-import { TagProvider } from '@/providers/tag';
+import React, {useState, useEffect} from 'react';
+import {Drawer, Button, Input, Switch, Select} from 'antd';
+import {FileSelectDrawer} from '@/components/FileSelectDrawer';
+import {CategoryProvider} from '@/providers/category';
+import {TagProvider} from '@/providers/tag';
 import style from './index.module.scss';
 
 interface IProps {
@@ -12,7 +12,7 @@ interface IProps {
   onChange?: (arg: any) => void;
 }
 
-const FormItem = ({ label, content }) => {
+const FormItem = ({label, content}) => {
   return (
     <div className={style.formItem}>
       <span>{label}</span>
@@ -22,11 +22,11 @@ const FormItem = ({ label, content }) => {
 };
 
 export const ArticleSettingDrawer: React.FC<IProps> = ({
-  article = {},
-  visible,
-  onClose,
-  onChange,
-}) => {
+                                                         article = {},
+                                                         visible,
+                                                         onClose,
+                                                         onChange,
+                                                       }) => {
   const [fileVisible, setFileVisible] = useState(false);
   const [summary, setSummary] = useState(article.summary || null);
   const [categorys, setCategorys] = useState<Array<ICategory>>([]);
@@ -95,7 +95,7 @@ export const ArticleSettingDrawer: React.FC<IProps> = ({
           <Input.TextArea
             className={style.formItem}
             placeholder="请输入文章摘要"
-            autoSize={{ minRows: 6, maxRows: 8 }}
+            autoSize={{minRows: 6, maxRows: 8}}
             value={summary}
             onChange={e => {
               setSummary(e.target.value);
@@ -117,7 +117,7 @@ export const ArticleSettingDrawer: React.FC<IProps> = ({
       />
       <FormItem
         label="开启评论"
-        content={<Switch checked={isCommentable} onChange={setCommentable} />}
+        content={<Switch checked={isCommentable} onChange={setCommentable}/>}
       />
 
       <FormItem
@@ -126,7 +126,7 @@ export const ArticleSettingDrawer: React.FC<IProps> = ({
           <Select
             value={selectedCategory}
             onChange={setSelectedCategory}
-            style={{ width: '100%' }}
+            style={{width: '100%'}}
           >
             {categorys.map(t => (
               <Select.Option key={t.id} value={t.id}>
@@ -143,7 +143,7 @@ export const ArticleSettingDrawer: React.FC<IProps> = ({
             mode="tags"
             value={selectedTags}
             onChange={setSelectedTags}
-            style={{ width: '100%' }}
+            style={{width: '100%'}}
           >
             {tags.map(tag => (
               <Select.Option key={tag.id} value={tag.id}>
@@ -158,7 +158,7 @@ export const ArticleSettingDrawer: React.FC<IProps> = ({
         content={
           <div className={style.cover}>
             <div onClick={() => setFileVisible(true)} className={style.preview}>
-              <img src={cover} alt="预览图" />
+              <img src={cover} alt="预览图"/>
             </div>
 
             <Input

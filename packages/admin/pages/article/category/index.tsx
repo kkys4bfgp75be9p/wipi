@@ -1,16 +1,16 @@
-import React, { useState, useCallback, useMemo } from 'react';
-import { NextPage } from 'next';
-import { Row, Col, Card, Button, Input, Popconfirm, Form, message } from 'antd';
+import React, {useState, useCallback, useMemo} from 'react';
+import {NextPage} from 'next';
+import {Row, Col, Card, Button, Input, Popconfirm, Form, message} from 'antd';
 import cls from 'classnames';
-import { AdminLayout } from '@/layout/AdminLayout';
-import { CategoryProvider } from '@providers/category';
+import {AdminLayout} from '@/layout/AdminLayout';
+import {CategoryProvider} from '@providers/category';
 import style from './index.module.scss';
 
 interface IProps {
   data: ICategory[];
 }
 
-const Page: NextPage<IProps> = ({ data: defaultData = [] }) => {
+const Page: NextPage<IProps> = ({data: defaultData = []}) => {
   const [data, setData] = useState(defaultData);
   const [mode, setMode] = useState('create');
   const [current, setCurrent] = useState(null);
@@ -91,7 +91,7 @@ const Page: NextPage<IProps> = ({ data: defaultData = [] }) => {
               className={cls(style.btns, isCreateMode ? false : style.isEdit)}
             >
               {isCreateMode ? (
-                <Button type="primary" onClick={() => addTag({ label, value })}>
+                <Button type="primary" onClick={() => addTag({label, value})}>
                   保存
                 </Button>
               ) : (
@@ -154,7 +154,7 @@ const Page: NextPage<IProps> = ({ data: defaultData = [] }) => {
 
 Page.getInitialProps = async () => {
   const data = await CategoryProvider.getCategory();
-  return { data };
+  return {data};
 };
 
 export default Page;

@@ -1,5 +1,5 @@
-import React, { useState, useCallback } from 'react';
-import { Pagination as APagination } from 'antd';
+import React, {useState, useCallback} from 'react';
+import {Pagination as APagination} from 'antd';
 import style from './index.module.scss';
 
 interface IProps {
@@ -12,9 +12,9 @@ interface IProps {
 }
 
 export const usePagination = ({
-  page: defaultPage = 1,
-  pageSize: defaultPageSize = 12,
-}): [{ page: number; pageSize: number }, (arg: any, arg1: any) => void] => {
+                                page: defaultPage = 1,
+                                pageSize: defaultPageSize = 12,
+                              }): [{ page: number; pageSize: number }, (arg: any, arg1: any) => void] => {
   const [page, setPage] = useState(defaultPage);
   const [pageSize, setPageSize] = useState(defaultPageSize);
 
@@ -23,16 +23,16 @@ export const usePagination = ({
     setPageSize(pageSize);
   }, []);
 
-  return [{ page, pageSize }, updatePagination];
+  return [{page, pageSize}, updatePagination];
 };
 
 export const Pagination: React.FC<IProps> = ({
-  total,
-  onChange,
-  page,
-  pageSize,
-  hideOnSinglePage = false,
-}) => {
+                                               total,
+                                               onChange,
+                                               page,
+                                               pageSize,
+                                               hideOnSinglePage = false,
+                                             }) => {
   return (
     <div className={style.wrapper}>
       {total > 0 ? (

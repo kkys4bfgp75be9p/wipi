@@ -1,15 +1,16 @@
-import React, { useCallback, useState } from 'react';
-import { Form, Button, Input, Icon } from 'antd';
+import React, {useCallback, useState} from 'react';
+import {Form, Button, Input, Icon} from 'antd';
 import Router from 'next/router';
 import Link from 'next/link';
-import { FormComponentProps } from 'antd/es/form';
-import { UserProvider } from '@providers/user';
+import {FormComponentProps} from 'antd/es/form';
+import {UserProvider} from '@providers/user';
 import style from './index.module.scss';
 
-interface ILoginProps extends FormComponentProps {}
+interface ILoginProps extends FormComponentProps {
+}
 
-const _Login: React.FC<ILoginProps> = ({ form }) => {
-  const { getFieldDecorator } = form;
+const _Login: React.FC<ILoginProps> = ({form}) => {
+  const {getFieldDecorator} = form;
   const [loading, setLoading] = useState(false);
 
   const submit = useCallback(e => {
@@ -36,11 +37,11 @@ const _Login: React.FC<ILoginProps> = ({ form }) => {
         <Form onSubmit={submit}>
           <Form.Item label="账户">
             {getFieldDecorator('name', {
-              rules: [{ required: true, message: '请输入用户名！' }],
+              rules: [{required: true, message: '请输入用户名！'}],
             })(
               <Input
                 prefix={
-                  <Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />
+                  <Icon type="user" style={{color: 'rgba(0,0,0,.25)'}}/>
                 }
                 size="large"
                 placeholder="请输入用户名"
@@ -49,11 +50,11 @@ const _Login: React.FC<ILoginProps> = ({ form }) => {
           </Form.Item>
           <Form.Item label="密码">
             {getFieldDecorator('password', {
-              rules: [{ required: true, message: '请输入密码！' }],
+              rules: [{required: true, message: '请输入密码！'}],
             })(
               <Input
                 prefix={
-                  <Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />
+                  <Icon type="lock" style={{color: 'rgba(0,0,0,.25)'}}/>
                 }
                 type="password"
                 size="large"
@@ -66,7 +67,7 @@ const _Login: React.FC<ILoginProps> = ({ form }) => {
               type="primary"
               htmlType="submit"
               size="large"
-              style={{ width: '100%' }}
+              style={{width: '100%'}}
               loading={loading}
               disabled={loading}
             >
@@ -83,4 +84,4 @@ const _Login: React.FC<ILoginProps> = ({ form }) => {
   );
 };
 
-export default Form.create<ILoginProps>({ name: 'login' })(_Login);
+export default Form.create<ILoginProps>({name: 'login'})(_Login);

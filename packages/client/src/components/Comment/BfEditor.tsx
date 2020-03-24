@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { Spin, message } from 'antd';
+import React, {useState, useEffect, useRef, useCallback} from 'react';
+import {Spin, message} from 'antd';
 import 'braft-editor/dist/index.css';
 
 interface IProps {
@@ -9,7 +9,7 @@ interface IProps {
 
 let BraftEditor;
 
-export const BfEditor: React.FC<IProps> = ({ value = '', onChange }) => {
+export const BfEditor: React.FC<IProps> = ({value = '', onChange}) => {
   const ref = useRef(null);
   const [editorState, setEditorState] = useState();
   const [mounted, setMounted] = useState(false);

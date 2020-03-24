@@ -1,16 +1,17 @@
-import React, { useState, useCallback } from 'react';
-import { NextPage } from 'next';
-import { useRouter } from 'next/router';
+import React, {useState, useCallback} from 'react';
+import {NextPage} from 'next';
+import {useRouter} from 'next/router';
 import Link from 'next/link';
-import { Modal, Divider, Badge, Popconfirm, Spin, Select, message } from 'antd';
+import {Modal, Divider, Badge, Popconfirm, Spin, Select, message} from 'antd';
 import * as dayjs from 'dayjs';
-import { AdminLayout } from '@/layout/AdminLayout';
-import { PageProvider } from '@providers/page';
-import { ViewProvider } from '@/providers/view';
-import { ViewChart } from '@/components/ViewChart';
+import {AdminLayout} from '@/layout/AdminLayout';
+import {PageProvider} from '@providers/page';
+import {ViewProvider} from '@/providers/view';
+import {ViewChart} from '@/components/ViewChart';
 import style from './index.module.scss';
-import { useSetting } from '@/hooks/useSetting';
-import { SPTDataTable } from '@/components/SPTDataTable';
+import {useSetting} from '@/hooks/useSetting';
+import {SPTDataTable} from '@/components/SPTDataTable';
+
 const url = require('url');
 
 const columns = [
@@ -28,7 +29,7 @@ const columns = [
         count={views}
         showZero={true}
         overflowCount={Infinity}
-        style={{ backgroundColor: '#52c41a' }}
+        style={{backgroundColor: '#52c41a'}}
       />
     ),
   },
@@ -60,9 +61,9 @@ interface IProps {
 }
 
 const Page: NextPage<IProps> = ({
-  pages: defaultPages = [],
-  total: defaultTotal = 0,
-}) => {
+                                  pages: defaultPages = [],
+                                  total: defaultTotal = 0,
+                                }) => {
   const router = useRouter();
   const setting = useSetting();
   const [pages, setPages] = useState<IPage[]>(defaultPages);
@@ -132,17 +133,17 @@ const Page: NextPage<IProps> = ({
       return (
         <span className={style.action}>
           {isDraft ? (
-            <a onClick={() => editPage(record.id, { status: 'publish' })}>
+            <a onClick={() => editPage(record.id, {status: 'publish'})}>
               启用
             </a>
           ) : (
-            <a onClick={() => editPage(record.id, { status: 'draft' })}>禁用</a>
+            <a onClick={() => editPage(record.id, {status: 'draft'})}>禁用</a>
           )}
-          <Divider type="vertical" />
+          <Divider type="vertical"/>
           <Link href={`/page/editor/[id]`} as={`/page/editor/` + record.id}>
             <a target="_blank">编辑</a>
           </Link>
-          <Divider type="vertical" />
+          <Divider type="vertical"/>
           <span
             onClick={() => {
               setVisible(true);
@@ -151,7 +152,7 @@ const Page: NextPage<IProps> = ({
           >
             <a>查看访问</a>
           </span>
-          <Divider type="vertical" />
+          <Divider type="vertical"/>
           <Popconfirm
             title="确认删除这个页面？"
             onConfirm={() => deleteArticle(record.id)}
@@ -187,10 +188,10 @@ const Page: NextPage<IProps> = ({
               label: '状态',
               field: 'status',
               children: (
-                <Select style={{ width: 180 }}>
+                <Select style={{width: 180}}>
                   {[
-                    { label: '已发布', value: 'publish' },
-                    { label: '草稿', value: 'draft' },
+                    {label: '已发布', value: 'publish'},
+                    {label: '草稿', value: 'draft'},
                   ].map(t => {
                     return (
                       <Select.Option key={t.label} value={t.value}>
@@ -216,11 +217,11 @@ const Page: NextPage<IProps> = ({
           footer={null}
         >
           {loading ? (
-            <div style={{ textAlign: 'center' }}>
+            <div style={{textAlign: 'center'}}>
               <Spin spinning={loading}></Spin>
             </div>
           ) : (
-            <ViewChart data={views} />
+            <ViewChart data={views}/>
           )}
         </Modal>
       </div>
@@ -229,8 +230,8 @@ const Page: NextPage<IProps> = ({
 };
 
 Page.getInitialProps = async () => {
-  const pages = await PageProvider.getPages({ page: 1, pageSize: 12 });
-  return { pages: pages[0], total: pages[1] };
+  const pages = await PageProvider.getPages({page: 1, pageSize: 12});
+  return {pages: pages[0], total: pages[1]};
 };
 
 export default Page;

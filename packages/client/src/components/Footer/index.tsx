@@ -1,5 +1,5 @@
 import React from "react";
-import { Icon } from "antd";
+import {Icon} from "antd";
 import style from "./index.module.scss";
 
 const RSS = () => {
@@ -27,13 +27,13 @@ const RSS = () => {
   );
 };
 
-export const Footer = ({ setting, className = "" }) => {
+export const Footer = ({setting, className = ""}) => {
   return (
     <footer className={className}>
       <ul className={style.icons}>
         <li>
           <a className={style.github} href="/rss" target="_blank">
-            <RSS />
+            <RSS/>
           </a>
         </li>
         <li>
@@ -42,7 +42,7 @@ export const Footer = ({ setting, className = "" }) => {
             href="https://github.com/zhxuc/wipi"
             target="_blank"
           >
-            <Icon type="github" />
+            <Icon type="github"/>
           </a>
         </li>
       </ul>

@@ -1,4 +1,4 @@
-import { httpProvider } from "./http";
+import {httpProvider} from "./http";
 
 export class CategoryProvider {
   /**

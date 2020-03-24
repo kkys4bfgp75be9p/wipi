@@ -1,5 +1,5 @@
-import { useState, useRef, useEffect } from "react";
-import { PageProvider } from "@providers/page";
+import {useState, useRef, useEffect} from "react";
+import {PageProvider} from "@providers/page";
 
 const defaultMenus = [
   {

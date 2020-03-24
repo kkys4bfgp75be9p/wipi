@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import cls from 'classnames';
-import { Spin, Upload, Icon, message } from 'antd';
-import { FileProvider } from '@providers/file';
+import {Spin, Upload, Icon, message} from 'antd';
+import {FileProvider} from '@providers/file';
 import style from './index.module.scss';
-import { ContentUtils } from 'braft-utils';
+import {ContentUtils} from 'braft-utils';
 import 'braft-editor/dist/index.css';
 
 interface IProps {
@@ -13,7 +13,7 @@ interface IProps {
 
 let BraftEditor;
 
-export const Editor: React.FC<IProps> = ({ value = '', onChange }) => {
+export const Editor: React.FC<IProps> = ({value = '', onChange}) => {
   const ref = useRef(null);
   const [editorState, setEditorState] = useState();
   const [mounted, setMounted] = useState(false);
@@ -44,7 +44,8 @@ export const Editor: React.FC<IProps> = ({ value = '', onChange }) => {
 
     let size = param.file.size || 0;
 
-    let hide = () => {};
+    let hide = () => {
+    };
     if (size > 1024 * 1024 * 4) {
       hide = message.loading('文件上传中...', 0);
     }
@@ -113,7 +114,7 @@ export const Editor: React.FC<IProps> = ({ value = '', onChange }) => {
             className="control-item button upload-button"
             data-title="插入图片"
           >
-            <Icon type="picture" theme="filled" />
+            <Icon type="picture" theme="filled"/>
           </button>
         </Upload>
       ),

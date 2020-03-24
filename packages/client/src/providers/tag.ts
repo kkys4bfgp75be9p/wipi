@@ -1,4 +1,4 @@
-import { httpProvider } from "./http";
+import {httpProvider} from "./http";
 
 export class TagProvider {
   /**
@@ -17,8 +17,8 @@ export class TagProvider {
       `/tag/${id}/article`,
       needFilter
         ? {
-            params: { status: "publish" }
-          }
+          params: {status: "publish"}
+        }
         : {}
     );
   }

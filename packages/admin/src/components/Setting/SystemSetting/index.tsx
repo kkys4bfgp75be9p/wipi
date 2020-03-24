@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { Form, Input, Button, Icon, message } from 'antd';
-import { FileSelectDrawer } from '@/components/FileSelectDrawer';
-import { SettingProvider } from '@providers/setting';
+import React, {useState, useEffect} from 'react';
+import {Form, Input, Button, Icon, message} from 'antd';
+import {FileSelectDrawer} from '@/components/FileSelectDrawer';
+import {SettingProvider} from '@providers/setting';
 
-export const SystemSetting = ({ setting }) => {
+export const SystemSetting = ({setting}) => {
   const [visible, setVisible] = useState(false);
   const [mode, setMode] = useState('logo');
   const [systemUrl, setSystemUrl] = useState(null);

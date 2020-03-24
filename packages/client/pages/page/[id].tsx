@@ -1,19 +1,19 @@
-import React, { useState, useEffect, useRef } from "react";
-import { NextPage } from "next";
-import { Helmet } from "react-helmet";
+import React, {useState, useEffect, useRef} from "react";
+import {NextPage} from "next";
+import {Helmet} from "react-helmet";
 import hljs from "highlight.js";
-import { Layout } from "@/layout/Layout";
+import {Layout} from "@/layout/Layout";
 import Viewer from "viewerjs";
-import { CommentAndRecommendArticles } from "@components/CommentAndRecommendArticles";
-import { PageProvider } from "@providers/page";
-import { useSetting } from "@/hooks/useSetting";
+import {CommentAndRecommendArticles} from "@components/CommentAndRecommendArticles";
+import {PageProvider} from "@providers/page";
+import {useSetting} from "@/hooks/useSetting";
 import style from "./index.module.scss";
 
 interface IProps {
   page: IPage;
 }
 
-const Page: NextPage<IProps> = ({ page }) => {
+const Page: NextPage<IProps> = ({page}) => {
   const setting = useSetting();
   const ref = useRef(null);
   const [tocs, setTocs] = useState([]);
@@ -58,7 +58,7 @@ const Page: NextPage<IProps> = ({ page }) => {
 
   // 大图插件
   useEffect(() => {
-    new Viewer(ref.current, { inline: false });
+    new Viewer(ref.current, {inline: false});
   }, []);
 
   return (
@@ -75,18 +75,18 @@ const Page: NextPage<IProps> = ({ page }) => {
           <div className="container">
             {page.cover && (
               <div className={style.meta}>
-                <img className={style.cover} src={page.cover} alt="文章封面" />
+                <img className={style.cover} src={page.cover} alt="文章封面"/>
               </div>
             )}
             <div className={style.content}>
               <div
                 ref={ref}
                 className={"markdown"}
-                dangerouslySetInnerHTML={{ __html: page.html }}
+                dangerouslySetInnerHTML={{__html: page.html}}
               ></div>
             </div>
           </div>
-          <CommentAndRecommendArticles pageId={page.id} isCommentable={true} />
+          <CommentAndRecommendArticles pageId={page.id} isCommentable={true}/>
         </div>
       )}
     </Layout>
@@ -94,9 +94,9 @@ const Page: NextPage<IProps> = ({ page }) => {
 };
 
 Page.getInitialProps = async ctx => {
-  const { id } = ctx.query;
+  const {id} = ctx.query;
   const page = await PageProvider.getPage(id);
-  return { page };
+  return {page};
 };
 
 export default Page;

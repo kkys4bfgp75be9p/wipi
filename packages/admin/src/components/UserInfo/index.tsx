@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import Link from 'next/link';
 import Router from 'next/router';
-import { Menu, Dropdown, Avatar } from 'antd';
+import {Menu, Dropdown, Avatar} from 'antd';
 
 const menus = [
   {
@@ -30,7 +30,8 @@ export const UserInfo = () => {
     try {
       info = JSON.parse(info);
       setUser(info as any);
-    } catch (e) {}
+    } catch (e) {
+    }
 
     if (!info) {
       Router.replace('/login');
@@ -61,11 +62,11 @@ export const UserInfo = () => {
     <Dropdown overlay={menu}>
       <div>
         {user && user.avatar ? (
-          <Avatar size={'small'} src={user.avatar} />
+          <Avatar size={'small'} src={user.avatar}/>
         ) : (
-          <Avatar size={'small'} icon="user" />
+          <Avatar size={'small'} icon="user"/>
         )}
-        {user ? <span style={{ marginLeft: 8 }}>Hi, {user.name}</span> : null}
+        {user ? <span style={{marginLeft: 8}}>Hi, {user.name}</span> : null}
       </div>
     </Dropdown>
   );

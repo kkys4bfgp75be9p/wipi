@@ -1,20 +1,20 @@
 import React from "react";
-import { NextPage } from "next";
+import {NextPage} from "next";
 import Link from "next/link";
 import cls from "classnames";
-import { Row, Col, Timeline } from "antd";
+import {Row, Col, Timeline} from "antd";
 import * as dayjs from "dayjs";
-import { Layout } from "@/layout/Layout";
-import { ArticleProvider } from "@providers/article";
-import { RecommendArticles } from "@components/RecommendArticles";
-import { Tags } from "@components/Tags";
+import {Layout} from "@/layout/Layout";
+import {ArticleProvider} from "@providers/article";
+import {RecommendArticles} from "@components/RecommendArticles";
+import {Tags} from "@components/Tags";
 import style from "./index.module.scss";
 
 interface IProps {
   articles: { [key: string]: { [key: string]: IArticle[] } };
 }
 
-const ArchiveItem = ({ month, articles = [] }) => {
+const ArchiveItem = ({month, articles = []}) => {
   return (
     <div className={style.item}>
       <h3>{month}</h3>
@@ -36,7 +36,7 @@ const ArchiveItem = ({ month, articles = [] }) => {
   );
 };
 
-const Archives: NextPage<IProps> = ({ articles }) => {
+const Archives: NextPage<IProps> = ({articles}) => {
   return (
     <Layout>
       <div className={cls("container", style.container)}>
@@ -62,8 +62,8 @@ const Archives: NextPage<IProps> = ({ articles }) => {
             </div>
           </Col>
           <Col sm={8} className={style.aside}>
-            <RecommendArticles mode="inline" />
-            <Tags />
+            <RecommendArticles mode="inline"/>
+            <Tags/>
           </Col>
         </Row>
       </div>
@@ -74,7 +74,7 @@ const Archives: NextPage<IProps> = ({ articles }) => {
 // 服务端预取数据
 Archives.getInitialProps = async () => {
   const articles = await ArticleProvider.getArchives();
-  return { articles };
+  return {articles};
 };
 
 export default Archives;

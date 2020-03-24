@@ -1,10 +1,10 @@
-import React, { useState, useCallback } from 'react';
-import { NextPage } from 'next';
-import { Badge, Divider, Select, message } from 'antd';
+import React, {useState, useCallback} from 'react';
+import {NextPage} from 'next';
+import {Badge, Divider, Select, message} from 'antd';
 import * as dayjs from 'dayjs';
-import { AdminLayout } from '@/layout/AdminLayout';
-import { UserProvider } from '@/providers/user';
-import { SPTDataTable } from '@/components/SPTDataTable';
+import {AdminLayout} from '@/layout/AdminLayout';
+import {UserProvider} from '@/providers/user';
+import {SPTDataTable} from '@/components/SPTDataTable';
 import style from './index.module.scss';
 
 const Page: NextPage = () => {
@@ -82,21 +82,21 @@ const Page: NextPage = () => {
       return (
         <span className={style.action}>
           {isLocked ? (
-            <a onClick={() => updateUser({ ...record, status: 'active' })}>
+            <a onClick={() => updateUser({...record, status: 'active'})}>
               启用
             </a>
           ) : (
-            <a onClick={() => updateUser({ ...record, status: 'locked' })}>
+            <a onClick={() => updateUser({...record, status: 'locked'})}>
               禁用
             </a>
           )}
-          <Divider type="vertical" />
+          <Divider type="vertical"/>
           {isAdmin ? (
-            <a onClick={() => updateUser({ ...record, role: 'visitor' })}>
+            <a onClick={() => updateUser({...record, role: 'visitor'})}>
               解除授权
             </a>
           ) : (
-            <a onClick={() => updateUser({ ...record, role: 'admin' })}>授权</a>
+            <a onClick={() => updateUser({...record, role: 'admin'})}>授权</a>
           )}
         </span>
       );
@@ -125,10 +125,10 @@ const Page: NextPage = () => {
               label: '状态',
               field: 'status',
               children: (
-                <Select style={{ width: 180 }}>
+                <Select style={{width: 180}}>
                   {[
-                    { label: '锁定', value: 'locked' },
-                    { label: '可用', value: 'active' },
+                    {label: '锁定', value: 'locked'},
+                    {label: '可用', value: 'active'},
                   ].map(t => {
                     return (
                       <Select.Option key={t.label} value={t.value}>

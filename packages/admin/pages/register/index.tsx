@@ -1,15 +1,16 @@
-import React, { useCallback, useState } from 'react';
-import { Form, Button, Input, Icon, Modal } from 'antd';
+import React, {useCallback, useState} from 'react';
+import {Form, Button, Input, Icon, Modal} from 'antd';
 import Router from 'next/router';
 import Link from 'next/link';
-import { FormComponentProps } from 'antd/es/form';
-import { UserProvider } from '@providers/user';
+import {FormComponentProps} from 'antd/es/form';
+import {UserProvider} from '@providers/user';
 import style from './index.module.scss';
 
-interface IProps extends FormComponentProps {}
+interface IProps extends FormComponentProps {
+}
 
-const _Register: React.FC<IProps> = ({ form }) => {
-  const { getFieldDecorator } = form;
+const _Register: React.FC<IProps> = ({form}) => {
+  const {getFieldDecorator} = form;
   const [loading, setLoading] = useState(false);
 
   const compareToFirstPassword = (rule, value, callback) => {
@@ -22,7 +23,7 @@ const _Register: React.FC<IProps> = ({ form }) => {
 
   const validateToNextPassword = (rule, value, callback) => {
     if (value) {
-      form.validateFields(['confirm'], { force: true });
+      form.validateFields(['confirm'], {force: true});
     }
     callback();
   };
@@ -59,11 +60,11 @@ const _Register: React.FC<IProps> = ({ form }) => {
         <Form onSubmit={submit}>
           <Form.Item hasFeedback label="账户">
             {getFieldDecorator('name', {
-              rules: [{ required: true, message: '请输入用户名！' }],
+              rules: [{required: true, message: '请输入用户名！'}],
             })(
               <Input
                 prefix={
-                  <Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />
+                  <Icon type="user" style={{color: 'rgba(0,0,0,.25)'}}/>
                 }
                 autoComplete={'off'}
                 size="large"
@@ -74,7 +75,7 @@ const _Register: React.FC<IProps> = ({ form }) => {
           <Form.Item hasFeedback label="密码">
             {getFieldDecorator('password', {
               rules: [
-                { required: true, message: '请输入密码！' },
+                {required: true, message: '请输入密码！'},
 
                 {
                   validator: validateToNextPassword,
@@ -83,7 +84,7 @@ const _Register: React.FC<IProps> = ({ form }) => {
             })(
               <Input
                 prefix={
-                  <Icon type="password" style={{ color: 'rgba(0,0,0,.25)' }} />
+                  <Icon type="password" style={{color: 'rgba(0,0,0,.25)'}}/>
                 }
                 autoComplete={'off'}
                 type="password"
@@ -95,7 +96,7 @@ const _Register: React.FC<IProps> = ({ form }) => {
           <Form.Item hasFeedback label="确认密码">
             {getFieldDecorator('confirm', {
               rules: [
-                { required: true, message: '请再次输入密码！' },
+                {required: true, message: '请再次输入密码！'},
 
                 {
                   validator: compareToFirstPassword,
@@ -104,7 +105,7 @@ const _Register: React.FC<IProps> = ({ form }) => {
             })(
               <Input
                 prefix={
-                  <Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />
+                  <Icon type="lock" style={{color: 'rgba(0,0,0,.25)'}}/>
                 }
                 autoComplete={'off'}
                 type="password"
@@ -118,7 +119,7 @@ const _Register: React.FC<IProps> = ({ form }) => {
               type="primary"
               htmlType="submit"
               size="large"
-              style={{ width: '100%' }}
+              style={{width: '100%'}}
               loading={loading}
               disabled={loading}
             >
@@ -135,4 +136,4 @@ const _Register: React.FC<IProps> = ({ form }) => {
   );
 };
 
-export default Form.create<IProps>({ name: 'register' })(_Register);
+export default Form.create<IProps>({name: 'register'})(_Register);

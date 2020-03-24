@@ -1,4 +1,4 @@
-import { httpProvider } from "./http";
+import {httpProvider} from "./http";
 
 export class UserProvider {
   /**
@@ -22,7 +22,7 @@ export class UserProvider {
    * @param params
    */
   static getUsers(params): Promise<[IUser[], number]> {
-    return httpProvider.get("/user", { params });
+    return httpProvider.get("/user", {params});
   }
 
   /**

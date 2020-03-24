@@ -1,18 +1,18 @@
-import { httpProvider } from "./http";
+import {httpProvider} from "./http";
 
 export class PageProvider {
   /**
    * 获取所有页面
    */
   static async getPages(params): Promise<[IPage[], number]> {
-    return httpProvider.get("/page", { params: params });
+    return httpProvider.get("/page", {params: params});
   }
 
   /**
    * 获取所有已发布页面
    */
   static async getAllPublisedPages(): Promise<[IPage[], number]> {
-    return httpProvider.get("/page", { params: { status: "publish" } });
+    return httpProvider.get("/page", {params: {status: "publish"}});
   }
 
   /**

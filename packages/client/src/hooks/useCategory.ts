@@ -1,5 +1,5 @@
-import { useState, useRef, useEffect } from "react";
-import { CategoryProvider } from "@providers/category";
+import {useState, useRef, useEffect} from "react";
+import {CategoryProvider} from "@providers/category";
 
 let cache = null;
 

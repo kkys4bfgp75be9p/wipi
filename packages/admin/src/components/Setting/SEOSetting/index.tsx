@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { Form, Input, Button, message } from "antd";
-import { SettingProvider } from "@providers/setting";
+import React, {useState, useEffect} from "react";
+import {Form, Input, Button, message} from "antd";
+import {SettingProvider} from "@providers/setting";
 
-export const SEOSetting = ({ setting }) => {
+export const SEOSetting = ({setting}) => {
   const [seoKeyword, setSeoKeyword] = useState(null);
   const [seoDesc, setSeoDesc] = useState(null);
 

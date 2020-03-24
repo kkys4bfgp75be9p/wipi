@@ -1,20 +1,21 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, {useState, useEffect, useCallback, useRef} from 'react';
 import cls from 'classnames';
 import Router from 'next/router';
-import { NextPage } from 'next';
-import { Button, Input, message, PageHeader, Icon, Drawer } from 'antd';
-import { Editor as CKEditor } from '@components/Editor';
-import { FileSelectDrawer } from '@/components/FileSelectDrawer';
-import { PageProvider } from '@providers/page';
-import { useSetting } from '@/hooks/useSetting';
+import {NextPage} from 'next';
+import {Button, Input, message, PageHeader, Icon, Drawer} from 'antd';
+import {Editor as CKEditor} from '@components/Editor';
+import {FileSelectDrawer} from '@/components/FileSelectDrawer';
+import {PageProvider} from '@providers/page';
+import {useSetting} from '@/hooks/useSetting';
 import style from './index.module.scss';
+
 const url = require('url');
 
 interface IProps {
   page: IPage;
 }
 
-const Editor: NextPage<IProps> = ({ page: defaultPage = {} }) => {
+const Editor: NextPage<IProps> = ({page: defaultPage = {}}) => {
   const setting = useSetting();
   const [fileDrawerVisible, setFileDrawerVisible] = useState(false);
   const [id, setId] = useState(defaultPage.id);
@@ -170,7 +171,7 @@ const Editor: NextPage<IProps> = ({ page: defaultPage = {} }) => {
           }}
         />
         <Input
-          style={{ marginTop: 16 }}
+          style={{marginTop: 16}}
           placeholder="请配置页面路径"
           defaultValue={page.path}
           onChange={e => {
@@ -220,9 +221,9 @@ const Editor: NextPage<IProps> = ({ page: defaultPage = {} }) => {
 };
 
 Editor.getInitialProps = async ctx => {
-  const { id } = ctx.query;
+  const {id} = ctx.query;
   const page = await PageProvider.getPage(id);
-  return { page };
+  return {page};
 };
 
 export default Editor;

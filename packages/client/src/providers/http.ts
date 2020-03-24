@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { message } from 'antd';
+import {message} from 'antd';
 import Router from 'next/router';
 
 export const httpProvider = axios.create({
@@ -24,7 +24,7 @@ httpProvider.interceptors.response.use(
   data => {
     if (data.status && data.status == 200 && data.data.status == 'error') {
       typeof window !== 'undefined' &&
-        message.error({ message: data.data.msg });
+      message.error({message: data.data.msg});
       return;
     }
 
@@ -49,10 +49,10 @@ httpProvider.interceptors.response.use(
 
         default:
           typeof window !== 'undefined' &&
-            message.error(
-              (err.response && err.response.data && err.response.data.msg) ||
-                '未知错误!'
-            );
+          message.error(
+            (err.response && err.response.data && err.response.data.msg) ||
+            '未知错误!'
+          );
       }
     }
 

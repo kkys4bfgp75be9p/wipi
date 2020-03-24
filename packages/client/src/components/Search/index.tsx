@@ -1,18 +1,19 @@
-import React, { useState, useCallback, useEffect, useRef } from "react";
+import React, {useState, useCallback, useEffect, useRef} from "react";
 import cls from "classnames";
 import Router from "next/router";
-import { Spin } from "antd";
-import { SearchProvider } from "@providers/search";
-import { ArticleList } from "@components/ArticleList";
+import {Spin} from "antd";
+import {SearchProvider} from "@providers/search";
+import {ArticleList} from "@components/ArticleList";
 import style from "./index.module.scss";
 
 interface IProps {
   visible: boolean;
   onClose: () => void;
 }
+
 let timer = null;
 
-export const Search: React.FC<IProps> = ({ visible = false, onClose }) => {
+export const Search: React.FC<IProps> = ({visible = false, onClose}) => {
   const ref = useRef(null);
   const [articles, setArticles] = useState<IArticle[] | null>(null);
   const [keyword, setKeyword] = useState("");
@@ -92,14 +93,14 @@ export const Search: React.FC<IProps> = ({ visible = false, onClose }) => {
 
           {loading && (
             <div className={style.loading}>
-              <Spin tip="正在搜索中..." spinning={true} />
+              <Spin tip="正在搜索中..." spinning={true}/>
             </div>
           )}
         </div>
         {hasSearch && !loading && (
           <div className={cls(style.ret, hasSearch ? style.active : false)}>
             {articles && articles.length ? (
-              <ArticleList articles={articles} bordered />
+              <ArticleList articles={articles} bordered/>
             ) : (
               <p className={style.none}>未搜索到数据</p>
             )}

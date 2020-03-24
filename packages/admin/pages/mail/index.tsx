@@ -1,10 +1,10 @@
-import React, { useState, useCallback } from 'react';
-import { NextPage } from 'next';
-import { Button, Modal, Popconfirm, message } from 'antd';
+import React, {useState, useCallback} from 'react';
+import {NextPage} from 'next';
+import {Button, Modal, Popconfirm, message} from 'antd';
 import * as dayjs from 'dayjs';
-import { AdminLayout } from '@/layout/AdminLayout';
-import { MailProvider } from '@/providers/mail';
-import { SPTDataTable } from '@/components/SPTDataTable';
+import {AdminLayout} from '@/layout/AdminLayout';
+import {MailProvider} from '@/providers/mail';
+import {SPTDataTable} from '@/components/SPTDataTable';
 import style from './index.module.scss';
 
 const Mail: NextPage = () => {
@@ -55,7 +55,7 @@ const Mail: NextPage = () => {
       render: (_, record) => (
         <Button
           type="link"
-          style={{ paddingLeft: 0 }}
+          style={{paddingLeft: 0}}
           onClick={() => {
             setSelectedMail(record);
           }}
@@ -126,7 +126,7 @@ const Mail: NextPage = () => {
         >
           <div
             className="markdown"
-            style={{ overflow: 'auto !important' }}
+            style={{overflow: 'auto !important'}}
             dangerouslySetInnerHTML={{
               __html: selectedMail && selectedMail.html,
             }}

@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { Button, Icon, Avatar } from 'antd';
-import { format } from 'timeago.js';
+import React, {useState, useEffect, useCallback, useRef} from 'react';
+import {Button, Icon, Avatar} from 'antd';
+import {format} from 'timeago.js';
 import cls from 'classnames';
 import Viewer from 'viewerjs';
-import { CommentProvider } from '@providers/comment';
-import { Editor } from './Editor';
+import {CommentProvider} from '@providers/comment';
+import {Editor} from './Editor';
 import style from './index.module.scss';
 
 const colors = [
@@ -30,14 +30,15 @@ const getRandomColor = (() => {
 })();
 
 export const CommentItem = ({
-  comment,
-  parentComment,
-  hostId,
-  isHostInPage,
-  onReply = () => {},
-  subComments = [],
-  isChildren = false,
-}) => {
+                              comment,
+                              parentComment,
+                              hostId,
+                              isHostInPage,
+                              onReply = () => {
+                              },
+                              subComments = [],
+                              isChildren = false,
+                            }) => {
   const [visible, setVisible] = useState(false);
   const [replyComment, setReplyComment] = useState(null);
 
@@ -46,7 +47,7 @@ export const CommentItem = ({
       <header>
         <Avatar
           size={isChildren ? 24 : 32}
-          style={{ backgroundColor: getRandomColor(comment.name) }}
+          style={{backgroundColor: getRandomColor(comment.name)}}
         >
           {('' + comment.name).charAt(0).toUpperCase()}
         </Avatar>
@@ -62,10 +63,10 @@ export const CommentItem = ({
           ) : null}
         </span>
       </header>
-      <main style={{ paddingLeft: isChildren ? 24 + 10 : 32 + 10 }}>
+      <main style={{paddingLeft: isChildren ? 24 + 10 : 32 + 10}}>
         <div
           className={cls('markdown', style.content)}
-          dangerouslySetInnerHTML={{ __html: comment.html }}
+          dangerouslySetInnerHTML={{__html: comment.html}}
         ></div>
         <div className={style.meta}>
           {comment.userAgent ? <span>{comment.userAgent}</span> : null}
@@ -82,7 +83,7 @@ export const CommentItem = ({
               setVisible(true);
             }}
           >
-            <Icon type="message" />
+            <Icon type="message"/>
             回复
           </span>
         </div>
@@ -111,7 +112,7 @@ export const CommentItem = ({
             style.editorContainer,
             visible ? style.isActive : false
           )}
-          style={{ paddingLeft: isChildren ? 24 + 10 : 32 + 10 }}
+          style={{paddingLeft: isChildren ? 24 + 10 : 32 + 10}}
         >
           <Editor
             hostId={hostId}
@@ -119,10 +120,10 @@ export const CommentItem = ({
             parentComment={comment}
             replyComment={replyComment}
             onSuccess={() => setReplyComment(null)}
-            renderFooter={({ loading, disabled, submit }) => {
+            renderFooter={({loading, disabled, submit}) => {
               return [
                 <Button
-                  style={{ marginRight: 16 }}
+                  style={{marginRight: 16}}
                   onClick={() => setVisible(false)}
                 >
                   收起
@@ -152,9 +153,9 @@ interface IProps {
 let viewer: any = null;
 
 export const MyComment: React.FC<IProps> = ({
-  articleId,
-  isInPage = false,
-}) => {
+                                              articleId,
+                                              isInPage = false,
+                                            }) => {
   const ref = useRef(null);
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
@@ -181,7 +182,7 @@ export const MyComment: React.FC<IProps> = ({
           setTotal(res[1]);
 
           if (!viewer) {
-            viewer = new Viewer(ref.current, { inline: false });
+            viewer = new Viewer(ref.current, {inline: false});
           } else {
             viewer.update();
           }

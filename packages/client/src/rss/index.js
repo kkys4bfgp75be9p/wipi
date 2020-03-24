@@ -14,7 +14,7 @@ function ifTruePushArray(bool, array, dataArray) {
     return;
   }
 
-  dataArray.forEach(function(item) {
+  dataArray.forEach(function (item) {
     ifTruePush(item, array, item);
   });
 }
@@ -25,74 +25,74 @@ function getSize(filename) {
 
 function generateXML(data) {
   var channel = [];
-  channel.push({ title: { _cdata: data.title } });
-  channel.push({ description: { _cdata: data.description || data.title } });
-  channel.push({ link: data.site_url || "http://github.com/dylang/node-rss" });
+  channel.push({title: {_cdata: data.title}});
+  channel.push({description: {_cdata: data.description || data.title}});
+  channel.push({link: data.site_url || "http://github.com/dylang/node-rss"});
   // image_url set?
   if (data.image_url) {
     channel.push({
       image: [
-        { url: data.image_url },
-        { title: data.title },
-        { link: data.site_url }
+        {url: data.image_url},
+        {title: data.title},
+        {link: data.site_url}
       ]
     });
   }
-  channel.push({ generator: data.generator });
-  channel.push({ lastBuildDate: new Date().toUTCString() });
+  channel.push({generator: data.generator});
+  channel.push({lastBuildDate: new Date().toUTCString()});
 
   ifTruePush(data.feed_url, channel, {
     "atom:link": {
-      _attr: { href: data.feed_url, rel: "self", type: "application/rss+xml" }
+      _attr: {href: data.feed_url, rel: "self", type: "application/rss+xml"}
     }
   });
-  ifTruePush(data.author, channel, { author: { _cdata: data.author } });
+  ifTruePush(data.author, channel, {author: {_cdata: data.author}});
   ifTruePush(data.pubDate, channel, {
     pubDate: new Date(data.pubDate).toGMTString()
   });
   ifTruePush(data.copyright, channel, {
-    copyright: { _cdata: data.copyright }
+    copyright: {_cdata: data.copyright}
   });
-  ifTruePush(data.language, channel, { language: { _cdata: data.language } });
+  ifTruePush(data.language, channel, {language: {_cdata: data.language}});
   ifTruePush(data.managingEditor, channel, {
-    managingEditor: { _cdata: data.managingEditor }
+    managingEditor: {_cdata: data.managingEditor}
   });
   ifTruePush(data.webMaster, channel, {
-    webMaster: { _cdata: data.webMaster }
+    webMaster: {_cdata: data.webMaster}
   });
-  ifTruePush(data.docs, channel, { docs: data.docs });
-  ifTruePush(data.ttl, channel, { ttl: data.ttl });
+  ifTruePush(data.docs, channel, {docs: data.docs});
+  ifTruePush(data.ttl, channel, {ttl: data.ttl});
   ifTruePush(data.hub, channel, {
-    "atom:link": { _attr: { href: data.hub, rel: "hub" } }
+    "atom:link": {_attr: {href: data.hub, rel: "hub"}}
   });
 
   if (data.categories) {
-    data.categories.forEach(function(category) {
-      ifTruePush(category, channel, { category: { _cdata: category } });
+    data.categories.forEach(function (category) {
+      ifTruePush(category, channel, {category: {_cdata: category}});
     });
   }
 
   ifTruePushArray(data.custom_elements, channel, data.custom_elements);
 
-  data.items.forEach(function(item) {
-    var item_values = [{ title: { _cdata: item.title } }];
+  data.items.forEach(function (item) {
+    var item_values = [{title: {_cdata: item.title}}];
     ifTruePush(item.description, item_values, {
-      description: { _cdata: item.description }
+      description: {_cdata: item.description}
     });
-    ifTruePush(item.url, item_values, { link: item.url });
+    ifTruePush(item.url, item_values, {link: item.url});
     ifTruePush(item.link || item.guid || item.title, item_values, {
       guid: [
-        { _attr: { isPermaLink: !item.guid && !!item.url } },
+        {_attr: {isPermaLink: !item.guid && !!item.url}},
         item.guid || item.url || item.title
       ]
     });
 
-    item.categories.forEach(function(category) {
-      ifTruePush(category, item_values, { category: { _cdata: category } });
+    item.categories.forEach(function (category) {
+      ifTruePush(category, item_values, {category: {_cdata: category}});
     });
 
     ifTruePush(item.author || data.author, item_values, {
-      "dc:creator": { _cdata: item.author || data.author }
+      "dc:creator": {_cdata: item.author || data.author}
     });
     ifTruePush(item.date, item_values, {
       pubDate: new Date(item.date).toGMTString()
@@ -100,8 +100,8 @@ function generateXML(data) {
 
     //Set GeoRSS to true if lat and long are set
     data.geoRSS = data.geoRSS || (item.lat && item.long);
-    ifTruePush(item.lat, item_values, { "geo:lat": item.lat });
-    ifTruePush(item.long, item_values, { "geo:long": item.long });
+    ifTruePush(item.lat, item_values, {"geo:lat": item.lat});
+    ifTruePush(item.long, item_values, {"geo:long": item.long});
 
     if (item.enclosure && item.enclosure.url) {
       if (item.enclosure.file) {
@@ -129,7 +129,7 @@ function generateXML(data) {
 
     ifTruePushArray(item.custom_elements, item_values, item.custom_elements);
 
-    channel.push({ item: item_values });
+    channel.push({item: item_values});
   });
 
   //set up the attributes for the RSS feed.
@@ -140,7 +140,7 @@ function generateXML(data) {
     version: "2.0"
   };
 
-  Object.keys(data.custom_namespaces).forEach(function(name) {
+  Object.keys(data.custom_namespaces).forEach(function (name) {
     _attr["xmlns:" + name] = data.custom_namespaces[name];
   });
 
@@ -150,7 +150,7 @@ function generateXML(data) {
   }
 
   return {
-    rss: [{ _attr: _attr }, { channel: channel }]
+    rss: [{_attr: _attr}, {channel: channel}]
   };
 }
 
@@ -179,7 +179,7 @@ function RSS(options, items) {
   this.custom_elements = options.custom_elements || [];
   this.items = items || [];
 
-  this.item = function(options) {
+  this.item = function (options) {
     options = options || {};
     var item = {
       title: options.title || "No title",
@@ -199,7 +199,7 @@ function RSS(options, items) {
     return this;
   };
 
-  this.xml = function(indent) {
+  this.xml = function (indent) {
     return (
       '<?xml version="1.0" encoding="UTF-8"?>' + xml(generateXML(this), indent)
     );

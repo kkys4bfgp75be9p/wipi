@@ -7,7 +7,7 @@ interface IProps {
   data: IView[];
 }
 
-export const ViewChart: React.FC<IProps> = ({ data = [] }) => {
+export const ViewChart: React.FC<IProps> = ({data = []}) => {
   const option = {
     grid: {
       top: "3%",
@@ -86,5 +86,5 @@ export const ViewChart: React.FC<IProps> = ({ data = [] }) => {
     ]
   };
 
-  return <ReactEcharts option={option} />;
+  return <ReactEcharts option={option}/>;
 };

@@ -1,11 +1,11 @@
-import { httpProvider } from "./http";
+import {httpProvider} from "./http";
 
 export class ViewProvider {
   /**
    * 获取所有访问
    */
   static async getViews(params): Promise<[IView[], number]> {
-    return httpProvider.get("/view", { params });
+    return httpProvider.get("/view", {params});
   }
 
   /**
@@ -17,7 +17,7 @@ export class ViewProvider {
   }
 
   static async getViewsByUrl(url): Promise<IView[]> {
-    return httpProvider.get("/view/url", { params: { url } });
+    return httpProvider.get("/view/url", {params: {url}});
   }
 
   static async deleteView(id): Promise<IView> {

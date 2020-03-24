@@ -19,7 +19,7 @@ export class NProgress extends React.Component<IProps> {
   timer = null;
 
   routeChangeStart = () => {
-    const { showAfterMs } = this.props;
+    const {showAfterMs} = this.props;
     clearTimeout(this.timer);
     this.timer = setTimeout((_NProgress as any).start, showAfterMs);
   };
@@ -30,7 +30,7 @@ export class NProgress extends React.Component<IProps> {
   };
 
   componentDidMount() {
-    const { options } = this.props;
+    const {options} = this.props;
 
     if (options) {
       (_NProgress as any).configure(options);
@@ -49,7 +49,7 @@ export class NProgress extends React.Component<IProps> {
   }
 
   render() {
-    const { color, spinner } = this.props;
+    const {color, spinner} = this.props;
 
     return (
       <style jsx global>{`

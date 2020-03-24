@@ -1,8 +1,8 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, {useEffect, useState, useRef} from "react";
 import Link from "next/link";
-import { ArticleProvider } from "@providers/article";
-import { ArticleList } from "@components/ArticleList";
-import { format } from "timeago.js";
+import {ArticleProvider} from "@providers/article";
+import {ArticleList} from "@components/ArticleList";
+import {format} from "timeago.js";
 import style from "./index.module.scss";
 
 interface IProps {
@@ -27,11 +27,11 @@ function isEqual(a, b) {
 }
 
 export const RecommendArticles: React.FC<IProps> = ({
-  mode = "vertical",
-  articleId = null,
-  needTitle = true,
-  asCard = false
-}) => {
+                                                      mode = "vertical",
+                                                      articleId = null,
+                                                      needTitle = true,
+                                                      asCard = false
+                                                    }) => {
   const articles = useRef(cache);
   const [, setUpdate] = useState(false);
 
@@ -76,7 +76,7 @@ export const RecommendArticles: React.FC<IProps> = ({
           })}
         </ul>
       ) : (
-        <ArticleList articles={articles.current || []} asCard={asCard} />
+        <ArticleList articles={articles.current || []} asCard={asCard}/>
       )}
     </div>
   );

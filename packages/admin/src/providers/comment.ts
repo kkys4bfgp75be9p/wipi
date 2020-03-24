@@ -1,11 +1,11 @@
-import { httpProvider } from "./http";
+import {httpProvider} from "./http";
 
 export class CommentProvider {
   /**
    * 获取所有评论
    */
   static async getComments(params): Promise<[IComment[], number]> {
-    return httpProvider.get("/comment", { params });
+    return httpProvider.get("/comment", {params});
   }
 
   /**
@@ -24,7 +24,7 @@ export class CommentProvider {
     hostId,
     params
   ): Promise<[IComment[], number]> {
-    return httpProvider.get(`/comment/host/${hostId}`, { params });
+    return httpProvider.get(`/comment/host/${hostId}`, {params});
   }
 
   /**

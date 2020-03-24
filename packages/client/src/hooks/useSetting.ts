@@ -1,5 +1,5 @@
-import React, { useRef, useEffect, useState } from "react";
-import { SettingProvider } from "@providers/setting";
+import React, {useRef, useEffect, useState} from "react";
+import {SettingProvider} from "@providers/setting";
 
 let cache = null;
 

@@ -1,6 +1,6 @@
-import React, { useState, useCallback, useEffect } from 'react';
-import { NextPage } from 'next';
-import { useRouter } from 'next/router';
+import React, {useState, useCallback, useEffect} from 'react';
+import {NextPage} from 'next';
+import {useRouter} from 'next/router';
 import Link from 'next/link';
 import {
   Tag,
@@ -13,15 +13,16 @@ import {
   message,
 } from 'antd';
 import * as dayjs from 'dayjs';
-import { AdminLayout } from '@/layout/AdminLayout';
-import { ArticleProvider } from '@providers/article';
+import {AdminLayout} from '@/layout/AdminLayout';
+import {ArticleProvider} from '@providers/article';
 import style from './index.module.scss';
-import { useSetting } from '@/hooks/useSetting';
-import { ViewProvider } from '@/providers/view';
-import { CategoryProvider } from '@/providers/category';
-import { TagProvider } from '@/providers/tag';
-import { ViewChart } from '@/components/ViewChart';
-import { SPTDataTable } from '@/components/SPTDataTable';
+import {useSetting} from '@/hooks/useSetting';
+import {ViewProvider} from '@/providers/view';
+import {CategoryProvider} from '@/providers/category';
+import {TagProvider} from '@/providers/tag';
+import {ViewChart} from '@/components/ViewChart';
+import {SPTDataTable} from '@/components/SPTDataTable';
+
 const url = require('url');
 
 const columns = [
@@ -81,7 +82,7 @@ const columns = [
         count={views}
         showZero={true}
         overflowCount={Infinity}
-        style={{ backgroundColor: '#52c41a' }}
+        style={{backgroundColor: '#52c41a'}}
       />
     ),
   },
@@ -99,9 +100,9 @@ interface IArticleProps {
 }
 
 const Article: NextPage<IArticleProps> = ({
-  articles: defaultArticles = [],
-  total: defaultTotal = 0,
-}) => {
+                                            articles: defaultArticles = [],
+                                            total: defaultTotal = 0,
+                                          }) => {
   const router = useRouter();
   const setting = useSetting();
   const [articles, setArticles] = useState<IArticle[]>(defaultArticles);
@@ -167,7 +168,7 @@ const Article: NextPage<IArticleProps> = ({
         <Link href={`/article/editor/[id]`} as={`/article/editor/` + record.id}>
           <a target="_blank">编辑</a>
         </Link>
-        <Divider type="vertical" />
+        <Divider type="vertical"/>
         <span
           onClick={() => {
             setVisible(true);
@@ -178,7 +179,7 @@ const Article: NextPage<IArticleProps> = ({
         >
           <a>查看访问</a>
         </span>
-        <Divider type="vertical" />
+        <Divider type="vertical"/>
         <Popconfirm
           title="确认删除这个文章？"
           onConfirm={() => deleteArticle(record.id)}
@@ -208,10 +209,10 @@ const Article: NextPage<IArticleProps> = ({
               label: '状态',
               field: 'status',
               children: (
-                <Select style={{ width: 180 }}>
+                <Select style={{width: 180}}>
                   {[
-                    { label: '已发布', value: 'publish' },
-                    { label: '草稿', value: 'draft' },
+                    {label: '已发布', value: 'publish'},
+                    {label: '草稿', value: 'draft'},
                   ].map(t => {
                     return (
                       <Select.Option key={t.label} value={t.value}>
@@ -226,7 +227,7 @@ const Article: NextPage<IArticleProps> = ({
               label: '分类',
               field: 'category',
               children: (
-                <Select style={{ width: 180 }}>
+                <Select style={{width: 180}}>
                   {categorys.map(t => (
                     <Select.Option key={t.id} value={t.id}>
                       {t.label}
@@ -250,11 +251,11 @@ const Article: NextPage<IArticleProps> = ({
           footer={null}
         >
           {loading ? (
-            <div style={{ textAlign: 'center' }}>
+            <div style={{textAlign: 'center'}}>
               <Spin spinning={loading}></Spin>
             </div>
           ) : (
-            <ViewChart data={views} />
+            <ViewChart data={views}/>
           )}
         </Modal>
       </div>
@@ -263,8 +264,8 @@ const Article: NextPage<IArticleProps> = ({
 };
 
 Article.getInitialProps = async () => {
-  const articles = await ArticleProvider.getArticles({ page: 1, pageSize: 12 });
-  return { articles: articles[0], total: articles[1] };
+  const articles = await ArticleProvider.getArticles({page: 1, pageSize: 12});
+  return {articles: articles[0], total: articles[1]};
 };
 
 export default Article;

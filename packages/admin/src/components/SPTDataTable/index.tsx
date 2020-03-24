@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { Table } from 'antd';
-import { Pagination } from '@/components/Pagination';
-import { Search } from '@/components/Search';
+import React, {useState, useEffect} from 'react';
+import {Table} from 'antd';
+import {Pagination} from '@/components/Pagination';
+import {Search} from '@/components/Search';
 import style from './index.module.scss';
 
 interface IProps {
@@ -14,13 +14,13 @@ interface IProps {
 }
 
 export const SPTDataTable: React.FC<IProps> = ({
-  searchFields = [],
-  columns = [],
-  data,
-  defaultTotal,
-  onSearch,
-  customDataTable = null,
-}) => {
+                                                 searchFields = [],
+                                                 columns = [],
+                                                 data,
+                                                 defaultTotal,
+                                                 onSearch,
+                                                 customDataTable = null,
+                                               }) => {
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(12);
@@ -29,7 +29,7 @@ export const SPTDataTable: React.FC<IProps> = ({
 
   useEffect(() => {
     setLoading(true);
-    const params = { page, pageSize, ...searchParams };
+    const params = {page, pageSize, ...searchParams};
     onSearch(params)
       .then(res => {
         setTotal(res[1]);

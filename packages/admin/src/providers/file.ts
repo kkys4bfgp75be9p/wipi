@@ -1,4 +1,4 @@
-import { httpProvider } from "./http";
+import {httpProvider} from "./http";
 
 export class FileProvider {
   /**
@@ -20,7 +20,7 @@ export class FileProvider {
    * 获取指定文件
    */
   static async getFiles(params): Promise<[IFile[], number]> {
-    return httpProvider.get("/file", { params });
+    return httpProvider.get("/file", {params});
   }
 
   /**

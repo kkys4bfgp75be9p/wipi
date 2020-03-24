@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { Form, Input, Button, Switch, message } from 'antd';
-import { FileSelectDrawer } from '@/components/FileSelectDrawer';
-import { SettingProvider } from '@providers/setting';
+import React, {useState, useEffect} from 'react';
+import {Form, Input, Button, Switch, message} from 'antd';
+import {FileSelectDrawer} from '@/components/FileSelectDrawer';
+import {SettingProvider} from '@providers/setting';
 
-export const OSSSetting = ({ setting }) => {
+export const OSSSetting = ({setting}) => {
   const [visible, setVisible] = useState(false);
   const [mode, setMode] = useState('logo');
   const [ossRegion, setOssRegion] = useState(null);
@@ -72,7 +72,7 @@ export const OSSSetting = ({ setting }) => {
         />
       </Form.Item>
       <Form.Item label="HTTPS">
-        <Switch checked={ossHttps} onChange={setOssHttps} />
+        <Switch checked={ossHttps} onChange={setOssHttps}/>
       </Form.Item>
       <FileSelectDrawer
         visible={visible}

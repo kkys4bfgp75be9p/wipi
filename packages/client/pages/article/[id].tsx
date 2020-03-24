@@ -1,18 +1,19 @@
-import React, { useState, useEffect, useCallback, useRef } from "react";
-import { Helmet } from "react-helmet";
-import { NextPage } from "next";
+import React, {useState, useEffect, useCallback, useRef} from "react";
+import {Helmet} from "react-helmet";
+import {NextPage} from "next";
 import Router from "next/router";
 import Link from "next/link";
 import cls from "classnames";
 import Viewer from "viewerjs";
-import { Anchor, Modal, Form, Input, message } from "antd";
+import {Anchor, Modal, Form, Input, message} from "antd";
 import * as dayjs from "dayjs";
 import hljs from "highlight.js";
-import { useSetting } from "@/hooks/useSetting";
-import { Layout } from "@/layout/Layout";
-import { ArticleProvider } from "@providers/article";
-import { CommentAndRecommendArticles } from "@components/CommentAndRecommendArticles";
+import {useSetting} from "@/hooks/useSetting";
+import {Layout} from "@/layout/Layout";
+import {ArticleProvider} from "@providers/article";
+import {CommentAndRecommendArticles} from "@components/CommentAndRecommendArticles";
 import style from "./index.module.scss";
+
 const url = require("url");
 
 interface IProps {
@@ -26,7 +27,7 @@ const buildTocTree = tocs => {
     let level = toc[0];
 
     if (!tree.length) {
-      tree.push({ node: toc, children: [] });
+      tree.push({node: toc, children: []});
     } else {
       let pre = tree[tree.length - 1];
       let nodes = [pre, ...pre.children];
@@ -35,9 +36,9 @@ const buildTocTree = tocs => {
 
       if (target) {
         target.children = target.children || [];
-        target.children.push({ node: toc, children: [] });
+        target.children.push({node: toc, children: []});
       } else {
-        tree.push({ node: toc, children: [] });
+        tree.push({node: toc, children: []});
       }
     }
   }
@@ -67,7 +68,7 @@ const renderTocTree = tocs => {
   );
 };
 
-const Article: NextPage<IProps> = ({ article }) => {
+const Article: NextPage<IProps> = ({article}) => {
   const setting = useSetting();
   const ref = useRef(null);
   const content = useRef(null);
@@ -138,7 +139,7 @@ const Article: NextPage<IProps> = ({ article }) => {
   // 大图插件
   useEffect(() => {
     if (!shouldCheckPassWord) {
-      new Viewer(ref.current, { inline: false });
+      new Viewer(ref.current, {inline: false});
     }
   }, [shouldCheckPassWord]);
 
@@ -148,7 +149,7 @@ const Article: NextPage<IProps> = ({ article }) => {
       if (!el) {
         return;
       }
-      const { top, height } = el.getBoundingClientRect();
+      const {top, height} = el.getBoundingClientRect();
       const diff = top + height;
       setAffix(diff > 100);
     };
@@ -195,18 +196,18 @@ const Article: NextPage<IProps> = ({ article }) => {
               content={url.resolve(setting.systemUrl, `/article/${article.id}`)}
             />
           )}
-          <meta itemProp="headline" content={article.title} />
+          <meta itemProp="headline" content={article.title}/>
           {article.tags && (
             <meta
               itemProp="keywords"
               content={article.tags.map(tag => tag.label).join(" ")}
             />
           )}
-          <meta itemProp="dataPublished" content={article.publishAt} />
-          {article.cover && <meta itemProp="image" content={article.cover} />}
+          <meta itemProp="dataPublished" content={article.publishAt}/>
+          {article.cover && <meta itemProp="image" content={article.cover}/>}
           <div className={style.meta}>
             {article.cover && (
-              <img className={style.cover} src={article.cover} alt="文章封面" />
+              <img className={style.cover} src={article.cover} alt="文章封面"/>
             )}
             <h1 className={style.title}>{article.title}</h1>
             <p className={style.desc}>
@@ -223,7 +224,7 @@ const Article: NextPage<IProps> = ({ article }) => {
               <div
                 ref={ref}
                 className={cls("markdown", style.markdown)}
-                dangerouslySetInnerHTML={{ __html: article.html }}
+                dangerouslySetInnerHTML={{__html: article.html}}
               ></div>
               <div className={style.articleFooter}>
                 {article.tags && article.tags.length ? (
@@ -276,9 +277,9 @@ const Article: NextPage<IProps> = ({ article }) => {
 };
 
 Article.getInitialProps = async ctx => {
-  const { id } = ctx.query;
+  const {id} = ctx.query;
   const article = await ArticleProvider.getArticle(id);
-  return { article };
+  return {article};
 };
 
 export default Article;

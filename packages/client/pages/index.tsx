@@ -1,15 +1,15 @@
-import React, { useState, useCallback, useEffect } from "react";
-import { NextPage } from "next";
+import React, {useState, useCallback, useEffect} from "react";
+import {NextPage} from "next";
 import cls from "classnames";
 import InfiniteScroll from "react-infinite-scroller";
-import { useSetting } from "@/hooks/useSetting";
-import { Layout } from "@/layout/Layout";
-import { ArticleProvider } from "@providers/article";
-import { CategoryMenu } from "@components/CategoryMenu";
-import { ArticleList } from "@components/ArticleList";
-import { RecommendArticles } from "@components/RecommendArticles";
-import { Tags } from "@components/Tags";
-import { Footer } from "@components/Footer";
+import {useSetting} from "@/hooks/useSetting";
+import {Layout} from "@/layout/Layout";
+import {ArticleProvider} from "@providers/article";
+import {CategoryMenu} from "@components/CategoryMenu";
+import {ArticleList} from "@components/ArticleList";
+import {RecommendArticles} from "@components/RecommendArticles";
+import {Tags} from "@components/Tags";
+import {Footer} from "@components/Footer";
 import style from "./index.module.scss";
 
 interface IHomeProps {
@@ -20,9 +20,9 @@ interface IHomeProps {
 const pageSize = 12;
 
 const Home: NextPage<IHomeProps> = ({
-  articles: defaultArticles = [],
-  total = 0
-}) => {
+                                      articles: defaultArticles = [],
+                                      total = 0
+                                    }) => {
   const setting = useSetting();
   const [affix, setAffix] = useState(false);
   const [page, setPage] = useState(1);
@@ -58,7 +58,7 @@ const Home: NextPage<IHomeProps> = ({
 
   return (
     <Layout needFooter={false}>
-      <CategoryMenu />
+      <CategoryMenu/>
       <div className={cls("container", style.container)}>
         <div className={style.content}>
           <InfiniteScroll
@@ -71,14 +71,14 @@ const Home: NextPage<IHomeProps> = ({
               </div>
             }
           >
-            <ArticleList articles={articles} />
+            <ArticleList articles={articles}/>
           </InfiniteScroll>
 
           <aside className={cls(style.aside)}>
             <div className={cls(affix ? style.isFixed : false)}>
-              <RecommendArticles mode="inline" />
-              <Tags />
-              <Footer className={style.footer} setting={setting} />
+              <RecommendArticles mode="inline"/>
+              <Tags/>
+              <Footer className={style.footer} setting={setting}/>
             </div>
           </aside>
         </div>
@@ -90,9 +90,9 @@ const Home: NextPage<IHomeProps> = ({
 // 服务端预取数据
 Home.getInitialProps = async () => {
   const [articles] = await Promise.all([
-    ArticleProvider.getArticles({ page: 1, pageSize, status: "publish" })
+    ArticleProvider.getArticles({page: 1, pageSize, status: "publish"})
   ]);
-  return { articles: articles[0], total: articles[1] };
+  return {articles: articles[0], total: articles[1]};
 };
 
 export default Home;

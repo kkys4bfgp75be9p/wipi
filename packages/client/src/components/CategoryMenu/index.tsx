@@ -1,14 +1,14 @@
 import React from "react";
-import { useRouter } from "next/router";
+import {useRouter} from "next/router";
 import Link from "next/link";
 import cls from "classnames";
-import { useCategory } from "@/hooks/useCategory";
+import {useCategory} from "@/hooks/useCategory";
 import style from "./index.module.scss";
 
 export const CategoryMenu = () => {
   const categories = useCategory();
   const router = useRouter();
-  const { category: routerCategory } = router.query;
+  const {category: routerCategory} = router.query;
 
   return (
     <div className={cls(style.wrapper)}>

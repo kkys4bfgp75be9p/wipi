@@ -1,7 +1,7 @@
 import React from "react";
 import App from "next/app";
-import { ViewProvider } from "@providers/view";
-import { NProgress } from "@components/NProgress";
+import {ViewProvider} from "@providers/view";
+import {NProgress} from "@components/NProgress";
 import "viewerjs/dist/viewer.css";
 import "highlight.js/styles/github-gist.css";
 import "@/theme/antd.less";
@@ -15,7 +15,7 @@ const addView = url => {
     return;
   }
 
-  ViewProvider.addView({ url });
+  ViewProvider.addView({url});
 };
 
 class MyApp extends App {
@@ -23,7 +23,8 @@ class MyApp extends App {
     try {
       const el = document.querySelector("#holderStyle");
       el.parentNode.removeChild(el);
-    } catch (e) {}
+    } catch (e) {
+    }
 
     const url = window.location.href;
     lastUrl = url;
@@ -40,7 +41,7 @@ class MyApp extends App {
   }
 
   render() {
-    const { Component, pageProps } = this.props;
+    const {Component, pageProps} = this.props;
 
     return (
       <div>
@@ -52,7 +53,7 @@ class MyApp extends App {
     }`
           }}
         ></style>
-        <NProgress color={"#ff0064"} />
+        <NProgress color={"#ff0064"}/>
         <Component {...pageProps} />
       </div>
     );

@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { Form, Input, Button, message } from "antd";
-import { SettingProvider } from "@providers/setting";
-import { SMTPProvider } from "@providers/smtp";
+import React, {useState, useEffect, useCallback} from "react";
+import {Form, Input, Button, message} from "antd";
+import {SettingProvider} from "@providers/setting";
+import {SMTPProvider} from "@providers/smtp";
 
-export const SMTPSetting = ({ setting }) => {
+export const SMTPSetting = ({setting}) => {
   const [smtpHost, setsmtpHost] = useState(null);
   const [smtpPort, setsmtpPort] = useState(null);
   const [smtpUser, setsmtpUser] = useState(null);
@@ -91,7 +91,7 @@ export const SMTPSetting = ({ setting }) => {
       <Button type="primary" onClick={save}>
         保存
       </Button>
-      <Button style={{ marginLeft: 16 }} onClick={test}>
+      <Button style={{marginLeft: 16}} onClick={test}>
         测试
       </Button>
     </div>

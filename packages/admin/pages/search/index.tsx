@@ -1,10 +1,10 @@
-import React, { useState, useCallback } from 'react';
-import { NextPage } from 'next';
-import { Badge, Popconfirm, message } from 'antd';
+import React, {useState, useCallback} from 'react';
+import {NextPage} from 'next';
+import {Badge, Popconfirm, message} from 'antd';
 import * as dayjs from 'dayjs';
-import { AdminLayout } from '@/layout/AdminLayout';
-import { SearchProvider } from '@/providers/search';
-import { SPTDataTable } from '@/components/SPTDataTable';
+import {AdminLayout} from '@/layout/AdminLayout';
+import {SearchProvider} from '@/providers/search';
+import {SPTDataTable} from '@/components/SPTDataTable';
 import style from './index.module.scss';
 
 const Search: NextPage = () => {
@@ -55,7 +55,7 @@ const Search: NextPage = () => {
           count={views}
           showZero={true}
           overflowCount={Infinity}
-          style={{ backgroundColor: '#52c41a' }}
+          style={{backgroundColor: '#52c41a'}}
         />
       ),
     },

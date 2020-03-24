@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { NextPage } from 'next';
+import React, {useState, useEffect, useCallback} from 'react';
+import {NextPage} from 'next';
 import {
   Row,
   Col,
@@ -14,14 +14,14 @@ import {
   message,
 } from 'antd';
 import Router from 'next/router';
-import { AdminLayout } from '@/layout/AdminLayout';
-import { FileSelectDrawer } from '@/components/FileSelectDrawer';
-import { ArticleProvider } from '@providers/article';
-import { CommentProvider } from '@providers/comment';
-import { TagProvider } from '@/providers/tag';
-import { CategoryProvider } from '@/providers/category';
-import { FileProvider } from '@/providers/file';
-import { UserProvider } from '@providers/user';
+import {AdminLayout} from '@/layout/AdminLayout';
+import {FileSelectDrawer} from '@/components/FileSelectDrawer';
+import {ArticleProvider} from '@providers/article';
+import {CommentProvider} from '@providers/comment';
+import {TagProvider} from '@/providers/tag';
+import {CategoryProvider} from '@/providers/category';
+import {FileProvider} from '@/providers/file';
+import {UserProvider} from '@providers/user';
 
 interface IOwnspaceProps {
   articlesCount: number;
@@ -31,15 +31,15 @@ interface IOwnspaceProps {
   commentsCount: number;
 }
 
-const { TabPane } = Tabs;
+const {TabPane} = Tabs;
 
 const Ownspace: NextPage<IOwnspaceProps> = ({
-  articlesCount = 0,
-  tagsCount = 0,
-  categoryCount = 0,
-  filesCount = 0,
-  commentsCount = 0,
-}) => {
+                                              articlesCount = 0,
+                                              tagsCount = 0,
+                                              categoryCount = 0,
+                                              filesCount = 0,
+                                              commentsCount = 0,
+                                            }) => {
   const data = [
     `累计发表了 ` + articlesCount + ' 篇文章',
     `累计创建了 ` + categoryCount + ' 个分类',
@@ -58,7 +58,8 @@ const Ownspace: NextPage<IOwnspaceProps> = ({
     try {
       info = JSON.parse(info);
       setUser(info as any);
-    } catch (e) {}
+    } catch (e) {
+    }
   }, []);
 
   const save = useCallback(() => {
@@ -84,7 +85,7 @@ const Ownspace: NextPage<IOwnspaceProps> = ({
       return;
     }
 
-    const data = { ...user, oldPassword, newPassword: newPassword2 };
+    const data = {...user, oldPassword, newPassword: newPassword2};
     UserProvider.updatePassword(data).then(() => {
       message.success('密码已更新，请重新登录');
       window.localStorage.clear();
@@ -97,19 +98,19 @@ const Ownspace: NextPage<IOwnspaceProps> = ({
       <Row gutter={16}>
         <Col span={12} md={12} xs={24}>
           <List
-            style={{ backgroundColor: '#fff' }}
+            style={{backgroundColor: '#fff'}}
             header={
               user && (
                 <div
-                  style={{ textAlign: 'center' }}
+                  style={{textAlign: 'center'}}
                   onClick={() => {
                     setVisible(true);
                   }}
                 >
                   {user.avatar ? (
-                    <Avatar size={64} src={user.avatar} />
+                    <Avatar size={64} src={user.avatar}/>
                   ) : (
-                    <Avatar size={64} icon="user" />
+                    <Avatar size={64} icon="user"/>
                   )}
                 </div>
               )
@@ -223,11 +224,11 @@ const Ownspace: NextPage<IOwnspaceProps> = ({
 
 Ownspace.getInitialProps = async () => {
   const [articles, tags, category, files, comments] = await Promise.all([
-    ArticleProvider.getArticles({ page: 1, pageSize: 6 }),
+    ArticleProvider.getArticles({page: 1, pageSize: 6}),
     TagProvider.getTags(),
     CategoryProvider.getCategory(),
-    FileProvider.getFiles({ page: 1, pageSize: 6 }),
-    CommentProvider.getComments({ page: 1, pageSize: 6 }),
+    FileProvider.getFiles({page: 1, pageSize: 6}),
+    CommentProvider.getComments({page: 1, pageSize: 6}),
   ]);
 
   return {

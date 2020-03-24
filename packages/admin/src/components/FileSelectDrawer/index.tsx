@@ -1,10 +1,10 @@
-import React, { useState, useCallback, useRef } from 'react';
-import { Alert, Drawer, Card, List, message } from 'antd';
-import { FileProvider } from '@providers/file';
-import { SPTDataTable } from '@/components/SPTDataTable';
+import React, {useState, useCallback, useRef} from 'react';
+import {Alert, Drawer, Card, List, message} from 'antd';
+import {FileProvider} from '@providers/file';
+import {SPTDataTable} from '@/components/SPTDataTable';
 import style from './index.module.scss';
 
-const { Meta } = Card;
+const {Meta} = Card;
 
 interface IFileProps {
   isCopy?: boolean;
@@ -28,12 +28,12 @@ const copy = value => {
 };
 
 export const FileSelectDrawer: React.FC<IFileProps> = ({
-  visible,
-  isCopy = false,
-  closeAfterClick = false,
-  onClose,
-  onChange,
-}) => {
+                                                         visible,
+                                                         isCopy = false,
+                                                         closeAfterClick = false,
+                                                         onClose,
+                                                         onChange,
+                                                       }) => {
   const ref = useRef();
   const [loading, setLoading] = useState<boolean>(false);
   const [files, setFiles] = useState<IFile[]>([]);
@@ -61,8 +61,8 @@ export const FileSelectDrawer: React.FC<IFileProps> = ({
       visible={visible}
     >
       {isCopy && (
-        <div style={{ marginBottom: 24 }}>
-          <Alert message="点击卡片复制链接，点击图片查看大图" type="info" />
+        <div style={{marginBottom: 24}}>
+          <Alert message="点击卡片复制链接，点击图片查看大图" type="info"/>
         </div>
       )}
       <div ref={ref}>
@@ -96,7 +96,7 @@ export const FileSelectDrawer: React.FC<IFileProps> = ({
                     hoverable
                     cover={
                       <div className={style.preview}>
-                        <img alt={file.originalname} src={file.url} />
+                        <img alt={file.originalname} src={file.url}/>
                       </div>
                     }
                     onClick={() => {
@@ -105,7 +105,7 @@ export const FileSelectDrawer: React.FC<IFileProps> = ({
                       closeAfterClick && onClose();
                     }}
                   >
-                    <Meta title={file.originalname} />
+                    <Meta title={file.originalname}/>
                   </Card>
                 </List.Item>
               )}

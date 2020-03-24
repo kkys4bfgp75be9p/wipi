@@ -1,9 +1,10 @@
 import React from "react";
-import { NextPage } from "next";
+import {NextPage} from "next";
 import RSS from "@/rss/index.js";
-import { ArticleProvider } from "@providers/article";
-import { SettingProvider } from "@providers/setting";
-import { CategoryProvider } from "@providers/category";
+import {ArticleProvider} from "@providers/article";
+import {SettingProvider} from "@providers/setting";
+import {CategoryProvider} from "@providers/category";
+
 const url = require("url");
 
 const Rss: NextPage = () => {
@@ -12,11 +13,11 @@ const Rss: NextPage = () => {
 
 // 服务端预取数据
 Rss.getInitialProps = async ctx => {
-  const { res } = ctx;
+  const {res} = ctx;
   res.setHeader("Content-Type", "text/xml");
 
   let [articles, setting, categories] = await Promise.all([
-    ArticleProvider.getArticles({ page: 1, pageSize: 99, status: "publish" }),
+    ArticleProvider.getArticles({page: 1, pageSize: 99, status: "publish"}),
     SettingProvider.getSetting(),
     CategoryProvider.getCategory()
   ]);

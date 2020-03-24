@@ -12,13 +12,13 @@ interface IProps {
 }
 
 export const ArticleList: React.FC<IProps> = ({
-  articles = [],
-  bordered = false,
-  asCard = false
-}) => {
+                                                articles = [],
+                                                bordered = false,
+                                                asCard = false
+                                              }) => {
   return (
     <div
-      style={{ width: "100%" }}
+      style={{width: "100%"}}
       className={cls(style.wrapper, asCard ? style.asCard : false)}
     >
       {articles && articles.length ? (
@@ -37,7 +37,7 @@ export const ArticleList: React.FC<IProps> = ({
                   {article.cover && (
                     <LazyLoad height={180}>
                       <div className={style.imgWrapper}>
-                        <img src={article.cover} alt="cover" />
+                        <img src={article.cover} alt="cover"/>
                       </div>
                     </LazyLoad>
                   )}

@@ -1,12 +1,13 @@
 import React from 'react';
-import { NextPage } from 'next';
+import {NextPage} from 'next';
 import Link from 'next/link';
-import { Row, Col, Icon, Table, Badge, Tag, Alert } from 'antd';
+import {Row, Col, Icon, Table, Badge, Tag, Alert} from 'antd';
 import * as dayjs from 'dayjs';
-import { useSetting } from '@/hooks/useSetting';
-import { AdminLayout } from '@/layout/AdminLayout';
-import { ArticleProvider } from '@providers/article';
+import {useSetting} from '@/hooks/useSetting';
+import {AdminLayout} from '@/layout/AdminLayout';
+import {ArticleProvider} from '@providers/article';
 import style from './index.module.scss';
+
 const url = require('url');
 
 interface IHomeProps {
@@ -70,7 +71,7 @@ const columns = [
         count={views}
         showZero={true}
         overflowCount={Infinity}
-        style={{ backgroundColor: '#52c41a' }}
+        style={{backgroundColor: '#52c41a'}}
       />
     ),
   },
@@ -82,7 +83,7 @@ const columns = [
   },
 ];
 
-const Home: NextPage<IHomeProps> = ({ articles = [] }) => {
+const Home: NextPage<IHomeProps> = ({articles = []}) => {
   const setting = useSetting();
 
   const titleColumn = {
@@ -123,7 +124,7 @@ const Home: NextPage<IHomeProps> = ({ articles = [] }) => {
             <Link href="/article">
               <a>
                 <span>更多</span>
-                <Icon type="right" />
+                <Icon type="right"/>
               </a>
             </Link>
           </span>
@@ -137,7 +138,7 @@ const Home: NextPage<IHomeProps> = ({ articles = [] }) => {
                   as={`/article/editor/` + article.id}
                 >
                   <a>
-                    <img width={120} alt="文章封面" src={article.cover} />
+                    <img width={120} alt="文章封面" src={article.cover}/>
                     <p className={style.title}>{article.title}</p>
                     <p className={style.desc}>{article.summary}</p>
                   </a>
@@ -149,7 +150,7 @@ const Home: NextPage<IHomeProps> = ({ articles = [] }) => {
       </div>
 
       {!setting || !setting.systemUrl ? (
-        <div style={{ marginTop: 24 }}>
+        <div style={{marginTop: 24}}>
           <Alert
             message={
               <span>
@@ -177,7 +178,7 @@ const Home: NextPage<IHomeProps> = ({ articles = [] }) => {
 
 Home.getInitialProps = async () => {
   const [articles] = await Promise.all([
-    ArticleProvider.getArticles({ page: 1, pageSize: 12 }),
+    ArticleProvider.getArticles({page: 1, pageSize: 12}),
   ]);
 
   return {

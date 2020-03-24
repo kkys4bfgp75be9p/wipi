@@ -1,14 +1,14 @@
 import React from "react";
 import cls from "classnames";
 import Link from "next/link";
-import { useRouter } from "next/router";
-import { useTags } from "@/hooks/useTags";
+import {useRouter} from "next/router";
+import {useTags} from "@/hooks/useTags";
 import style from "./index.module.scss";
 
 export const Tags = () => {
   const tags = useTags();
   const router = useRouter();
-  const { tag: routerTag } = router.query;
+  const {tag: routerTag} = router.query;
 
   return (
     <div className={style.wrapper}>

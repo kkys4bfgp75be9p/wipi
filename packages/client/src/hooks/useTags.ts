@@ -1,5 +1,5 @@
-import React, { useRef, useEffect, useState } from "react";
-import { TagProvider } from "@providers/tag";
+import React, {useRef, useEffect, useState} from "react";
+import {TagProvider} from "@providers/tag";
 
 let cache = null;
 

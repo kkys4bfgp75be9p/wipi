@@ -1,5 +1,5 @@
-import React, { useState, useCallback } from 'react';
-import { NextPage } from 'next';
+import React, {useState, useCallback} from 'react';
+import {NextPage} from 'next';
 import {
   Button,
   Select,
@@ -12,12 +12,13 @@ import {
   notification,
 } from 'antd';
 import * as dayjs from 'dayjs';
-import { AdminLayout } from '@/layout/AdminLayout';
-import { CommentProvider } from '@/providers/comment';
-import { SettingProvider } from '@/providers/setting';
-import { SPTDataTable } from '@/components/SPTDataTable';
-import { useSetting } from '@/hooks/useSetting';
+import {AdminLayout} from '@/layout/AdminLayout';
+import {CommentProvider} from '@/providers/comment';
+import {SettingProvider} from '@/providers/setting';
+import {SPTDataTable} from '@/components/SPTDataTable';
+import {useSetting} from '@/hooks/useSetting';
 import style from './index.module.scss';
+
 const url = require('url');
 
 interface IProps {
@@ -26,9 +27,9 @@ interface IProps {
 }
 
 const Comment: NextPage<IProps> = ({
-  comments: defaultComments = [],
-  total = 0,
-}) => {
+                                     comments: defaultComments = [],
+                                     total = 0,
+                                   }) => {
   const setting = useSetting();
   const [comments, setComments] = useState<IComment[]>(defaultComments);
   const [selectedComment, setSelectedComment] = useState(null);
@@ -49,7 +50,7 @@ const Comment: NextPage<IProps> = ({
   // 修改评论
   const updateComment = useCallback(
     (comment, pass = false) => {
-      CommentProvider.updateComment(comment.id, { pass }).then(() => {
+      CommentProvider.updateComment(comment.id, {pass}).then(() => {
         message.success(pass ? '评论已通过' : '评论已拒绝');
         getComments(params);
       });
@@ -145,7 +146,7 @@ const Comment: NextPage<IProps> = ({
       render: (_, record) => (
         <Button
           type="link"
-          style={{ paddingLeft: 0 }}
+          style={{paddingLeft: 0}}
           onClick={() => {
             setSelectedComment(record);
             setHTMLVisible(true);
@@ -210,11 +211,11 @@ const Comment: NextPage<IProps> = ({
     render: (_, record) => (
       <span className={style.action}>
         <a onClick={() => updateComment(record, true)}>通过</a>
-        <Divider type="vertical" />
+        <Divider type="vertical"/>
         <a onClick={() => updateComment(record, false)}>拒绝</a>
-        <Divider type="vertical" />
+        <Divider type="vertical"/>
         <a onClick={() => replayComment(record)}>回复</a>
-        <Divider type="vertical" />
+        <Divider type="vertical"/>
         <Popconfirm
           title="确认删除这个评论？"
           onConfirm={() => deleteComment(record.id)}
@@ -249,10 +250,10 @@ const Comment: NextPage<IProps> = ({
               label: '状态',
               field: 'pass',
               children: (
-                <Select style={{ width: 180 }}>
+                <Select style={{width: 180}}>
                   {[
-                    { label: '已通过', value: 1 },
-                    { label: '未通过', value: 0 },
+                    {label: '已通过', value: 1},
+                    {label: '未通过', value: 0},
                   ].map(t => {
                     return (
                       <Select.Option key={t.label} value={t.value as any}>
@@ -307,9 +308,9 @@ const Comment: NextPage<IProps> = ({
 
 Comment.getInitialProps = async () => {
   const [comments] = await Promise.all([
-    CommentProvider.getComments({ page: 1, pageSize: 12 }),
+    CommentProvider.getComments({page: 1, pageSize: 12}),
   ]);
-  return { comments: comments[0], total: comments[1] };
+  return {comments: comments[0], total: comments[1]};
 };
 
 export default Comment;
