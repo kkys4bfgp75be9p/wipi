@@ -9,15 +9,16 @@ import {
   UseGuards,
   Query,
 } from '@nestjs/common';
-import { JwtAuthGuard } from '../auth/jwt-auth.guard';
-import { RolesGuard, Roles } from '../auth/roles.guard';
-import { CategoryService } from './category.service';
-import { Category } from './category.entity';
+import {JwtAuthGuard} from '../auth/jwt-auth.guard';
+import {RolesGuard, Roles} from '../auth/roles.guard';
+import {CategoryService} from './category.service';
+import {Category} from './category.entity';
 
 @Controller('category')
 @UseGuards(RolesGuard)
 export class CategoryController {
-  constructor(private readonly categoryService: CategoryService) {}
+  constructor(private readonly categoryService: CategoryService) {
+  }
 
   /**
    * 添加标签

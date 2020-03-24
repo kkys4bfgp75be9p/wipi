@@ -12,22 +12,22 @@ import {
   UseGuards,
   Request,
 } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
-import { JwtAuthGuard } from '../auth/jwt-auth.guard';
-import { RolesGuard, Roles } from '../auth/roles.guard';
-import { UserService } from '../user/user.service';
-import { ArticleService } from './article.service';
-import { Article } from './article.entity';
+import {JwtService} from '@nestjs/jwt';
+import {JwtAuthGuard} from '../auth/jwt-auth.guard';
+import {RolesGuard, Roles} from '../auth/roles.guard';
+import {UserService} from '../user/user.service';
+import {ArticleService} from './article.service';
+import {Article} from './article.entity';
 
 @Controller('article')
 @UseGuards(RolesGuard)
 export class ArticleController {
   constructor(
     private readonly articleService: ArticleService,
-
     private readonly jwtService: JwtService,
     private readonly userService: UserService
-  ) {}
+  ) {
+  }
 
   /**
    * 创建文章

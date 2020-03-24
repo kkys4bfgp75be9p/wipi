@@ -6,7 +6,7 @@ import {
   UpdateDateColumn,
   BeforeInsert,
 } from 'typeorm';
-import { Exclude } from 'class-transformer';
+import {Exclude} from 'class-transformer';
 import * as bcrypt from 'bcrypt';
 
 @Entity()
@@ -27,23 +27,23 @@ export class User {
   @PrimaryGeneratedColumn('uuid')
   id: number;
 
-  @Column({ length: 500 })
+  @Column({length: 500})
   name: string;
 
   @Exclude()
-  @Column({ length: 500 })
+  @Column({length: 500})
   password: string;
 
-  @Column({ length: 500, default: null })
+  @Column({length: 500, default: null})
   avatar: string; // 头像
 
-  @Column({ length: 500, default: null })
+  @Column({length: 500, default: null})
   email: string; // 邮箱
 
-  @Column('simple-enum', { enum: ['admin', 'visitor'], default: 'visitor' })
+  @Column('simple-enum', {enum: ['admin', 'visitor'], default: 'visitor'})
   role: string; // 用户角色
 
-  @Column('simple-enum', { enum: ['locked', 'active'], default: 'active' })
+  @Column('simple-enum', {enum: ['locked', 'active'], default: 'active'})
   status: string; // 用户状态
 
   @CreateDateColumn({

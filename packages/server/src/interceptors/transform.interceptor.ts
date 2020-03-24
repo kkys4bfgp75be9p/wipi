@@ -4,9 +4,9 @@ import {
   CallHandler,
   ExecutionContext,
 } from '@nestjs/common';
-import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
-import { responseLogger } from '../logger';
+import {map} from 'rxjs/operators';
+import {Observable} from 'rxjs';
+import {responseLogger} from '../logger';
 
 interface Response<T> {
   data: T;

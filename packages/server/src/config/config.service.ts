@@ -5,18 +5,18 @@ import config from './config.default';
 @Injectable()
 export class ConfigService {
 
-    private readonly envConfig: { [key: string]: any };
+  private readonly envConfig: { [key: string]: any };
 
-    constructor() {
-        this.envConfig = config;
-    }
+  constructor() {
+    this.envConfig = config;
+  }
 
-    get(key: string) {
-        return this.envConfig[key];
-    }
+  get(key: string) {
+    return this.envConfig[key];
+  }
 
-    getDbConfig() {
-        return this.envConfig.mysql;
-    }
+  getDbConfig() {
+    return this.envConfig.mysql;
+  }
 
 }

@@ -12,20 +12,20 @@ import {
   HttpException,
   ClassSerializerInterceptor,
 } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
-import { JwtAuthGuard } from '../auth/jwt-auth.guard';
-import { RolesGuard, Roles } from '../auth/roles.guard';
-import { UserService } from './user.service';
-import { User } from './user.entity';
+import {JwtService} from '@nestjs/jwt';
+import {JwtAuthGuard} from '../auth/jwt-auth.guard';
+import {RolesGuard, Roles} from '../auth/roles.guard';
+import {UserService} from './user.service';
+import {User} from './user.entity';
 
 @Controller('user')
 @UseGuards(RolesGuard)
 export class UserController {
   constructor(
     private readonly userService: UserService,
-
     private readonly jwtService: JwtService
-  ) {}
+  ) {
+  }
 
   @UseInterceptors(ClassSerializerInterceptor)
   @Get()

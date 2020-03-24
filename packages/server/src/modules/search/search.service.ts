@@ -1,8 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { ArticleService } from '../article/article.service';
-import { Search } from './search.entity';
+import {Injectable} from '@nestjs/common';
+import {InjectRepository} from '@nestjs/typeorm';
+import {Repository} from 'typeorm';
+import {ArticleService} from '../article/article.service';
+import {Search} from './search.entity';
 
 @Injectable()
 export class SearchService {
@@ -10,7 +10,8 @@ export class SearchService {
     @InjectRepository(Search)
     private readonly searchRepository: Repository<Search>,
     private readonly articleService: ArticleService
-  ) {}
+  ) {
+  }
 
   /**
    * 搜素文章
@@ -24,7 +25,7 @@ export class SearchService {
 
   async addRecord(type, keyword) {
     const exist = await this.searchRepository.findOne({
-      where: { type, keyword },
+      where: {type, keyword},
     });
 
     if (exist) {
@@ -36,7 +37,7 @@ export class SearchService {
       return newData;
     }
 
-    const newData = await this.searchRepository.create({ type, keyword });
+    const newData = await this.searchRepository.create({type, keyword});
     await this.searchRepository.save(newData);
   }
 
@@ -48,7 +49,7 @@ export class SearchService {
       .createQueryBuilder('search')
       .orderBy('search.updateAt', 'DESC');
 
-    const { page = 1, pageSize = 12, pass, ...otherParams } = queryParams;
+    const {page = 1, pageSize = 12, pass, ...otherParams} = queryParams;
 
     query.skip((+page - 1) * +pageSize);
     query.take(+pageSize);

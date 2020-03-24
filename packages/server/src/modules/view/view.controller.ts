@@ -9,10 +9,10 @@ import {
   Body,
   Request,
 } from '@nestjs/common';
-import { JwtAuthGuard } from '../auth/jwt-auth.guard';
-import { RolesGuard, Roles } from '../auth/roles.guard';
-import { ViewService } from './view.service';
-import { View } from './view.entity';
+import {JwtAuthGuard} from '../auth/jwt-auth.guard';
+import {RolesGuard, Roles} from '../auth/roles.guard';
+import {ViewService} from './view.service';
+import {View} from './view.entity';
 
 function getClientIP(req) {
   const ip =
@@ -30,7 +30,8 @@ function getClientIP(req) {
 @Controller('view')
 @UseGuards(RolesGuard)
 export class ViewController {
-  constructor(private readonly viewService: ViewService) {}
+  constructor(private readonly viewService: ViewService) {
+  }
 
   /**
    * 添加访问

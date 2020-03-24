@@ -7,10 +7,10 @@ import {User} from './user.entity';
 import {ConfigModule} from '../../config';
 
 @Module({
-    imports: [ConfigModule, TypeOrmModule.forFeature([User]), forwardRef(() => AuthModule)],
-    providers: [UserService],
-    exports: [UserService],
-    controllers: [UserController],
+  imports: [ConfigModule, TypeOrmModule.forFeature([User]), forwardRef(() => AuthModule)],
+  providers: [UserService],
+  exports: [UserService],
+  controllers: [UserController],
 })
 export class UserModule {
 }

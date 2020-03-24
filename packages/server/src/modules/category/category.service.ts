@@ -1,23 +1,24 @@
-import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { Category } from './category.entity';
+import {Injectable, HttpException, HttpStatus} from '@nestjs/common';
+import {InjectRepository} from '@nestjs/typeorm';
+import {Repository} from 'typeorm';
+import {Category} from './category.entity';
 
 @Injectable()
 export class CategoryService {
   constructor(
     @InjectRepository(Category)
     private readonly categoryRepository: Repository<Category>
-  ) {}
+  ) {
+  }
 
   /**
    * 添加分类
    * @param Category
    */
   async create(Category: Partial<Category>): Promise<Category> {
-    const { label } = Category;
+    const {label} = Category;
     const existCategory = await this.categoryRepository.findOne({
-      where: { label },
+      where: {label},
     });
 
     if (existCategory) {
@@ -33,7 +34,7 @@ export class CategoryService {
    * 获取所有分类
    */
   async findAll(): Promise<Category[]> {
-    return this.categoryRepository.find({ order: { createAt: 'ASC' } });
+    return this.categoryRepository.find({order: {createAt: 'ASC'}});
   }
 
   /**

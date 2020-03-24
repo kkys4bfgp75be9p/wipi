@@ -1,14 +1,15 @@
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { View } from './view.entity';
+import {Injectable} from '@nestjs/common';
+import {InjectRepository} from '@nestjs/typeorm';
+import {Repository} from 'typeorm';
+import {View} from './view.entity';
 
 @Injectable()
 export class ViewService {
   constructor(
     @InjectRepository(View)
     private readonly viewRepository: Repository<View>
-  ) {}
+  ) {
+  }
 
   /**
    * 添加访问
@@ -16,7 +17,7 @@ export class ViewService {
    */
   async create(ip: string, userAgent: string, url: string): Promise<View> {
     const exist = await this.viewRepository.findOne({
-      where: { ip, userAgent, url },
+      where: {ip, userAgent, url},
     });
 
     if (exist) {
@@ -28,7 +29,7 @@ export class ViewService {
       return newData;
     }
 
-    const newData = await this.viewRepository.create({ ip, userAgent, url });
+    const newData = await this.viewRepository.create({ip, userAgent, url});
     await this.viewRepository.save(newData);
     return newData;
   }
@@ -41,7 +42,7 @@ export class ViewService {
       .createQueryBuilder('view')
       .orderBy('view.updateAt', 'DESC');
 
-    const { page = 1, pageSize = 12, pass, ...otherParams } = queryParams;
+    const {page = 1, pageSize = 12, pass, ...otherParams} = queryParams;
 
     query.skip((+page - 1) * +pageSize);
     query.take(+pageSize);
@@ -63,8 +64,8 @@ export class ViewService {
    */
   async findByUrl(url): Promise<any> {
     return this.viewRepository.find({
-      where: { url },
-      order: { updateAt: 'ASC' },
+      where: {url},
+      order: {updateAt: 'ASC'},
     });
   }
 

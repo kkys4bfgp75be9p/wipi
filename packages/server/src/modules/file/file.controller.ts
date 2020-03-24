@@ -9,15 +9,16 @@ import {
   UploadedFile,
   UseGuards,
 } from '@nestjs/common';
-import { JwtAuthGuard } from '../auth/jwt-auth.guard';
-import { RolesGuard, Roles } from '../auth/roles.guard';
-import { FileInterceptor } from '@nestjs/platform-express';
-import { FileService } from './file.service';
+import {JwtAuthGuard} from '../auth/jwt-auth.guard';
+import {RolesGuard, Roles} from '../auth/roles.guard';
+import {FileInterceptor} from '@nestjs/platform-express';
+import {FileService} from './file.service';
 
 @Controller('file')
 @UseGuards(RolesGuard)
 export class FileController {
-  constructor(private readonly fileService: FileService) {}
+  constructor(private readonly fileService: FileService) {
+  }
 
   /**
    * 上传文件

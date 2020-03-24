@@ -1,14 +1,15 @@
-import { JwtService } from '@nestjs/jwt';
-import { Injectable } from '@nestjs/common';
-import { User } from '../user/user.entity';
-import { UserService } from '../user/user.service';
+import {JwtService} from '@nestjs/jwt';
+import {Injectable} from '@nestjs/common';
+import {User} from '../user/user.entity';
+import {UserService} from '../user/user.service';
 
 @Injectable()
 export class AuthService {
   constructor(
     private readonly userService: UserService,
     private readonly jwtService: JwtService
-  ) {}
+  ) {
+  }
 
   createToken(user: Partial<User>) {
     const accessToken = this.jwtService.sign(user);
@@ -23,7 +24,7 @@ export class AuthService {
       email: data.email,
       role: data.role,
     });
-    return Object.assign(data, { token });
+    return Object.assign(data, {token});
   }
 
   async validateUser(payload: User): Promise<any> {

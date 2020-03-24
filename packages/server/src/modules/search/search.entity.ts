@@ -17,7 +17,7 @@ export class Search {
   @Column()
   keyword: string; // 搜索关键词
 
-  @Column({ default: 1 })
+  @Column({default: 1})
   count: number;
 
   @CreateDateColumn({

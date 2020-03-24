@@ -1,9 +1,9 @@
-import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { SettingService } from '../setting/setting.service';
-import { SMTP } from './smtp.entity';
-import { sendEmail } from './mail.util';
+import {Injectable, HttpException, HttpStatus} from '@nestjs/common';
+import {InjectRepository} from '@nestjs/typeorm';
+import {Repository} from 'typeorm';
+import {SettingService} from '../setting/setting.service';
+import {SMTP} from './smtp.entity';
+import {sendEmail} from './mail.util';
 
 @Injectable()
 export class SMTPService {
@@ -11,7 +11,8 @@ export class SMTPService {
     @InjectRepository(SMTP)
     private readonly smtpRepository: Repository<SMTP>,
     private readonly settingService: SettingService
-  ) {}
+  ) {
+  }
 
   /**
    * 添加邮件，发送邮件并保存
@@ -49,7 +50,7 @@ export class SMTPService {
       .createQueryBuilder('smtp')
       .orderBy('smtp.createAt', 'DESC');
 
-    const { page = 1, pageSize = 12, pass, ...otherParams } = queryParams;
+    const {page = 1, pageSize = 12, pass, ...otherParams} = queryParams;
 
     query.skip((+page - 1) * +pageSize);
     query.take(+pageSize);

@@ -9,15 +9,16 @@ import {
   UseGuards,
   Query,
 } from '@nestjs/common';
-import { JwtAuthGuard } from '../auth/jwt-auth.guard';
-import { RolesGuard, Roles } from '../auth/roles.guard';
-import { TagService } from './tag.service';
-import { Tag } from './tag.entity';
+import {JwtAuthGuard} from '../auth/jwt-auth.guard';
+import {RolesGuard, Roles} from '../auth/roles.guard';
+import {TagService} from './tag.service';
+import {Tag} from './tag.entity';
 
 @Controller('tag')
 @UseGuards(RolesGuard)
 export class TagController {
-  constructor(private readonly tagService: TagService) {}
+  constructor(private readonly tagService: TagService) {
+  }
 
   /**
    * 添加标签

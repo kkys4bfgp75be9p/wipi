@@ -1,12 +1,12 @@
-import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { SMTPService } from '../smtp/smtp.service';
-import { ArticleService } from '../article/article.service';
-import { SettingService } from '../setting/setting.service';
-import { UserService } from '../user/user.service';
-import { marked } from '../article/markdown.util';
-import { Comment } from './comment.entity';
+import {Injectable, HttpException, HttpStatus} from '@nestjs/common';
+import {InjectRepository} from '@nestjs/typeorm';
+import {Repository} from 'typeorm';
+import {SMTPService} from '../smtp/smtp.service';
+import {ArticleService} from '../article/article.service';
+import {SettingService} from '../setting/setting.service';
+import {UserService} from '../user/user.service';
+import {marked} from '../article/markdown.util';
+import {Comment} from './comment.entity';
 
 const url = require('url');
 const UAParser = require('ua-parser-js');
@@ -49,14 +49,15 @@ const parseUserAgent = userAgent => {
   return `${uaInfo.browser.name} ${uaInfo.os.name} ${
     uaInfo.device.vendor
       ? uaInfo.device.vendor +
-        ' ' +
-        uaInfo.device.model +
-        ' ' +
-        uaInfo.device.type
+      ' ' +
+      uaInfo.device.model +
+      ' ' +
+      uaInfo.device.type
       : ''
   }
   `;
 };
+
 @Injectable()
 export class CommentService {
   constructor(
@@ -66,7 +67,8 @@ export class CommentService {
     private readonly smtpService: SMTPService,
     private readonly settingService: SettingService,
     private readonly userService: UserService
-  ) {}
+  ) {
+  }
 
   /**
    * 创建评论
@@ -76,13 +78,13 @@ export class CommentService {
     userAgent,
     comment: Partial<Comment> & { reply?: string; createByAdmin?: boolean }
   ): Promise<Comment> {
-    const { hostId, name, email, content, createByAdmin = false } = comment;
+    const {hostId, name, email, content, createByAdmin = false} = comment;
 
     if (!hostId || !name || !email || !content) {
       throw new HttpException('缺失参数', HttpStatus.BAD_REQUEST);
     }
 
-    const { html } = marked(content);
+    const {html} = marked(content);
     comment.html = html;
     comment.pass = false;
     comment.userAgent = parseUserAgent(userAgent);
@@ -127,8 +129,8 @@ export class CommentService {
                 <p>评论内容：<b>${comment.content}</b></p>
                 <p align="right">${systemTitle}</p>
                 <p align="right">${dayjs(new Date()).format(
-                  'YYYY-MM-DD HH:mm:ss'
-                )}</p>
+            'YYYY-MM-DD HH:mm:ss'
+          )}</p>
                 <div style="width:700px;margin:0 auto;">
                     <div style="padding:10px 10px 0;border-top:1px solid #ccc;color:#747474;margin-bottom:20px;line-height:1.3em;font-size:12px;">
                         <p>此为系统邮件，请勿回复<br>
@@ -151,7 +153,7 @@ export class CommentService {
 
       try {
         // 通知所有管理员审核评论
-        const [users] = await this.userService.findAll({ role: 'admin' });
+        const [users] = await this.userService.findAll({role: 'admin'});
         users.forEach(user => {
           if (user.email) {
             sendEmail(user.name, user.email);
@@ -174,7 +176,7 @@ export class CommentService {
       .createQueryBuilder('comment')
       .orderBy('comment.createAt', 'DESC');
 
-    const { page = 1, pageSize = 12, pass, ...otherParams } = queryParams;
+    const {page = 1, pageSize = 12, pass, ...otherParams} = queryParams;
 
     query.skip((+page - 1) * +pageSize);
     query.take(+pageSize);
@@ -223,7 +225,7 @@ export class CommentService {
       .orderBy('comment.createAt', 'ASC')
       .setParameter('pass', true);
 
-    const { page = 1, pageSize = 12 } = queryParams;
+    const {page = 1, pageSize = 12} = queryParams;
     query.skip((+page - 1) * +pageSize);
     query.take(+pageSize);
     const [data, count] = await query.getManyAndCount();
@@ -232,7 +234,7 @@ export class CommentService {
       const subComments = await subQuery
         .setParameter('parentCommentId', item.id)
         .getMany();
-      Object.assign(item, { children: subComments });
+      Object.assign(item, {children: subComments});
     }
 
     return [data, count];
@@ -252,7 +254,7 @@ export class CommentService {
     const newData = await this.commentRepository.merge(old, data);
 
     if (newData.pass) {
-      const { replyUserName, replyUserEmail, hostId, isHostInPage } = newData;
+      const {replyUserName, replyUserEmail, hostId, isHostInPage} = newData;
 
       const isReply = replyUserName && replyUserEmail;
 
@@ -292,16 +294,16 @@ export class CommentService {
                   <p>您的评论已经被他人回复。点击下方按钮前往查看。</p>
                   <p align="center">
                     <a href="${url.resolve(
-                      systemUrl,
-                      `/${isHostInPage ? 'page' : 'article'}/` + hostId
-                    )}" style="display: inline-block; margin: 16px auto; width: 160px; height: 32px; line-height: 32px; color: #ff0064; border: 1px solid #ff0064; background-color: #fff0f6; border-radius: 4px; text-decoration: none;">
+              systemUrl,
+              `/${isHostInPage ? 'page' : 'article'}/` + hostId
+            )}" style="display: inline-block; margin: 16px auto; width: 160px; height: 32px; line-height: 32px; color: #ff0064; border: 1px solid #ff0064; background-color: #fff0f6; border-radius: 4px; text-decoration: none;">
                     前往查看
                     </a>
                   </p>
                   <p align="right">${systemTitle}</p>
                   <p align="right">${dayjs(new Date()).format(
-                    'YYYY-MM-DD HH:mm:ss'
-                  )}</p>
+              'YYYY-MM-DD HH:mm:ss'
+            )}</p>
                   <div style="width:700px;margin:0 auto;">
                       <div style="padding:10px 10px 0;border-top:1px solid #ccc;color:#747474;margin-bottom:20px;line-height:1.3em;font-size:12px;">
                           <p>此为系统邮件，请勿回复<br>
@@ -321,7 +323,8 @@ export class CommentService {
               `通知用户 ${replyUserName}（${replyUserEmail}），但发送邮件通知失败`
             );
           });
-        } catch (e) {}
+        } catch (e) {
+        }
       }
     }
 

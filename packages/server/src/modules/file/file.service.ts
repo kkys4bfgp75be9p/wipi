@@ -1,10 +1,10 @@
-import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import {Injectable, HttpException, HttpStatus} from '@nestjs/common';
+import {InjectRepository} from '@nestjs/typeorm';
+import {Repository} from 'typeorm';
 import * as dayjs from 'dayjs';
 import * as nuid from 'nuid';
-import { SettingService } from '../setting/setting.service';
-import { File } from './file.entity';
+import {SettingService} from '../setting/setting.service';
+import {File} from './file.entity';
 
 let OSS = require('ali-oss');
 
@@ -14,14 +14,15 @@ export class FileService {
     @InjectRepository(File)
     private readonly fileRepository: Repository<File>,
     private readonly settingService: SettingService
-  ) {}
+  ) {
+  }
 
   /**
    * 上传文件
    * @param file
    */
   async uploadFile(file: any): Promise<File> {
-    const { originalname, mimetype, size, buffer } = file;
+    const {originalname, mimetype, size, buffer} = file;
     // FIXME: 使用 uuid ，无法管理，改成相应资源包名
     const filename = `/${dayjs().format('YYYY-MM-DD')}/${originalname}`;
     const {
@@ -41,7 +42,7 @@ export class FileService {
       bucket: ossBucket,
       secure: ossHttps,
     });
-    const { url } = await client.put(filename, buffer);
+    const {url} = await client.put(filename, buffer);
     const newFile = await this.fileRepository.create({
       originalname,
       filename,
@@ -61,7 +62,7 @@ export class FileService {
       .createQueryBuilder('file')
       .orderBy('file.createAt', 'DESC');
 
-    const { page = 1, pageSize = 12, pass, ...otherParams } = queryParams;
+    const {page = 1, pageSize = 12, pass, ...otherParams} = queryParams;
 
     query.skip((+page - 1) * +pageSize);
     query.take(+pageSize);

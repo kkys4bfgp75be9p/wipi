@@ -10,9 +10,9 @@ import {
   OneToOne,
   ManyToOne,
 } from 'typeorm';
-import { Tag } from '../tag/tag.entity';
-import { Category } from '../category/category.entity';
-import { Comment } from '../comment/comment.entity';
+import {Tag} from '../tag/tag.entity';
+import {Category} from '../category/category.entity';
+import {Comment} from '../comment/comment.entity';
 
 @Entity()
 export class Article {
@@ -22,25 +22,25 @@ export class Article {
   @Column()
   title: string;
 
-  @Column({ default: null })
+  @Column({default: null})
   cover: string; // 封面图
 
-  @Column({ type: 'text', default: null })
+  @Column({type: 'text', default: null})
   summary: string; // 摘要，自动生成
 
-  @Column({ type: 'mediumtext', default: null, charset: 'utf8mb4' })
+  @Column({type: 'mediumtext', default: null, charset: 'utf8mb4'})
   content: string; // 原始内容
 
-  @Column({ type: 'mediumtext', default: null, charset: 'utf8mb4' })
+  @Column({type: 'mediumtext', default: null, charset: 'utf8mb4'})
   html: string; // 格式化内容，自动生成
 
-  @Column({ type: 'text', default: null })
+  @Column({type: 'text', default: null})
   toc: string; // 格式化内容索引，自动生成
 
   @ManyToOne(
     () => Category,
     category => category.articles,
-    { cascade: true }
+    {cascade: true}
   )
   @JoinTable()
   category: Category;
@@ -48,27 +48,27 @@ export class Article {
   @ManyToMany(
     () => Tag,
     tag => tag.articles,
-    { cascade: true }
+    {cascade: true}
   )
   @JoinTable()
   tags: Array<Tag>;
 
-  @Column('simple-enum', { enum: ['draft', 'publish'] })
+  @Column('simple-enum', {enum: ['draft', 'publish']})
   status: string; // 文章状态
 
-  @Column({ type: 'int', default: 0 })
+  @Column({type: 'int', default: 0})
   views: number; // 阅读量
 
-  @Column({ type: 'text', default: null, select: false })
+  @Column({type: 'text', default: null, select: false})
   password: string;
 
-  @Column({ type: 'boolean', default: false })
+  @Column({type: 'boolean', default: false})
   needPassword: boolean;
 
-  @Column({ type: 'boolean', default: true })
+  @Column({type: 'boolean', default: true})
   isCommentable: boolean;
 
-  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  @Column({type: 'timestamp', default: () => 'CURRENT_TIMESTAMP'})
   publishAt: Date; // 发布日期
 
   @CreateDateColumn({

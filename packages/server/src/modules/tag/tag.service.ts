@@ -1,22 +1,23 @@
-import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { Tag } from './tag.entity';
+import {Injectable, HttpException, HttpStatus} from '@nestjs/common';
+import {InjectRepository} from '@nestjs/typeorm';
+import {Repository} from 'typeorm';
+import {Tag} from './tag.entity';
 
 @Injectable()
 export class TagService {
   constructor(
     @InjectRepository(Tag)
     private readonly tagRepository: Repository<Tag>
-  ) {}
+  ) {
+  }
 
   /**
    * 添加标签
    * @param tag
    */
   async create(tag: Partial<Tag>): Promise<Tag> {
-    const { label } = tag;
-    const existTag = await this.tagRepository.findOne({ where: { label } });
+    const {label} = tag;
+    const existTag = await this.tagRepository.findOne({where: {label}});
 
     if (existTag) {
       throw new HttpException('标签已存在', HttpStatus.BAD_REQUEST);
@@ -31,7 +32,7 @@ export class TagService {
    * 获取所有标签
    */
   async findAll(): Promise<Tag[]> {
-    return this.tagRepository.find({ order: { createAt: 'ASC' } });
+    return this.tagRepository.find({order: {createAt: 'ASC'}});
   }
 
   /**

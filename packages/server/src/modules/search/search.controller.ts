@@ -6,15 +6,16 @@ import {
   UseGuards,
   Query,
 } from '@nestjs/common';
-import { JwtAuthGuard } from '../auth/jwt-auth.guard';
-import { RolesGuard, Roles } from '../auth/roles.guard';
+import {JwtAuthGuard} from '../auth/jwt-auth.guard';
+import {RolesGuard, Roles} from '../auth/roles.guard';
 // import { client } from './elasticsearch.client';
-import { SearchService } from './search.service';
+import {SearchService} from './search.service';
 
 @Controller('search')
 @UseGuards(RolesGuard)
 export class SearchController {
-  constructor(private readonly searchService: SearchService) {}
+  constructor(private readonly searchService: SearchService) {
+  }
 
   /**
    * 搜索文章

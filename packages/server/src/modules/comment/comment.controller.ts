@@ -10,15 +10,16 @@ import {
   UseGuards,
   Request,
 } from '@nestjs/common';
-import { JwtAuthGuard } from '../auth/jwt-auth.guard';
-import { RolesGuard, Roles } from '../auth/roles.guard';
-import { CommentService } from './comment.service';
-import { Comment } from './comment.entity';
+import {JwtAuthGuard} from '../auth/jwt-auth.guard';
+import {RolesGuard, Roles} from '../auth/roles.guard';
+import {CommentService} from './comment.service';
+import {Comment} from './comment.entity';
 
 @Controller('comment')
 @UseGuards(RolesGuard)
 export class CommentController {
-  constructor(private readonly commentService: CommentService) {}
+  constructor(private readonly commentService: CommentService) {
+  }
 
   /**
    * 创建评论

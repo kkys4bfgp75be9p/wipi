@@ -1,11 +1,12 @@
-import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { TagService } from '../tag/tag.service';
-import { CategoryService } from '../category/category.service';
-import { Article } from './article.entity';
-import { marked } from './markdown.util';
-import { Tag } from '../tag/tag.entity';
+import {Injectable, HttpException, HttpStatus} from '@nestjs/common';
+import {InjectRepository} from '@nestjs/typeorm';
+import {Repository} from 'typeorm';
+import {TagService} from '../tag/tag.service';
+import {CategoryService} from '../category/category.service';
+import {Article} from './article.entity';
+import {marked} from './markdown.util';
+import {Tag} from '../tag/tag.entity';
+
 const nodejieba = require('nodejieba');
 const topN = 4;
 
@@ -16,21 +17,22 @@ export class ArticleService {
     private readonly articleRepository: Repository<Article>,
     private readonly tagService: TagService,
     private readonly categoryService: CategoryService
-  ) {}
+  ) {
+  }
 
   /**
    * 创建文章
    * @param article
    */
   async create(article: Partial<Article>): Promise<Article> {
-    const { title } = article;
-    const exist = await this.articleRepository.findOne({ where: { title } });
+    const {title} = article;
+    const exist = await this.articleRepository.findOne({where: {title}});
 
     if (exist) {
       throw new HttpException('文章标题已存在', HttpStatus.BAD_REQUEST);
     }
 
-    let { content, tags, category } = article;
+    let {content, tags, category} = article;
     // 后台系统直接返回 html，toc
     // const { html, toc } = content ? marked(content) : { html: null, toc: null };
     tags = await this.tagService.findByIds(('' + tags).split(','));
@@ -58,7 +60,7 @@ export class ArticleService {
       .leftJoinAndSelect('article.category', 'category')
       .orderBy('article.publishAt', 'DESC');
 
-    const { page = 1, pageSize = 12, status, ...otherParams } = queryParams;
+    const {page = 1, pageSize = 12, status, ...otherParams} = queryParams;
 
     query.skip((+page - 1) * +pageSize);
     query.take(+pageSize);
@@ -96,10 +98,10 @@ export class ArticleService {
     const query = this.articleRepository
       .createQueryBuilder('article')
       .leftJoinAndSelect('article.category', 'category')
-      .where('category.value=:value', { value: category })
+      .where('category.value=:value', {value: category})
       .orderBy('article.publishAt', 'DESC');
 
-    const { page, pageSize, status } = queryParams;
+    const {page, pageSize, status} = queryParams;
     query.skip((+page - 1) * +pageSize);
     query.take(+pageSize);
 
@@ -128,10 +130,10 @@ export class ArticleService {
     const query = this.articleRepository
       .createQueryBuilder('article')
       .leftJoinAndSelect('article.tags', 'tag')
-      .where('tag.value=:value', { value: tag })
+      .where('tag.value=:value', {value: tag})
       .orderBy('article.publishAt', 'DESC');
 
-    const { page, pageSize, status } = queryParams;
+    const {page, pageSize, status} = queryParams;
     query.skip((+page - 1) * +pageSize);
     query.take(+pageSize);
 
@@ -156,8 +158,8 @@ export class ArticleService {
    */
   async getArchives(): Promise<{ [key: string]: Article[] }> {
     const data = await this.articleRepository.find({
-      where: { status: 'publish' },
-      order: { publishAt: 'DESC' },
+      where: {status: 'publish'},
+      order: {publishAt: 'DESC'},
     } as any);
     const months = [
       'January',
@@ -204,7 +206,7 @@ export class ArticleService {
    * @param id
    * @param password
    */
-  async checkPassword(id, { password }): Promise<{ pass: boolean }> {
+  async checkPassword(id, {password}): Promise<{ pass: boolean }> {
     const data = await this.articleRepository
       .createQueryBuilder('article')
       .where('article.id=:id')
@@ -214,7 +216,7 @@ export class ArticleService {
       .getOne();
 
     let pass = !!data;
-    return pass ? { pass: !!data, ...data } : { pass: false };
+    return pass ? {pass: !!data, ...data} : {pass: false};
   }
 
   /**
@@ -252,7 +254,7 @@ export class ArticleService {
    */
   async updateById(id, article: Partial<Article>): Promise<Article> {
     const oldArticle = await this.articleRepository.findOne(id);
-    let { content, tags, category, status } = article;
+    let {content, tags, category, status} = article;
     // 后台系统直接返回 html，toc
     // const { html, toc } = content ? marked(content) : oldArticle;
 
@@ -273,7 +275,7 @@ export class ArticleService {
     };
 
     if (tags) {
-      Object.assign(newArticle, { tags });
+      Object.assign(newArticle, {tags});
     }
 
     const updatedArticle = await this.articleRepository.merge(
@@ -349,7 +351,7 @@ export class ArticleService {
         return query.take(6).getMany();
       }
 
-      const { title, summary } = exist;
+      const {title, summary} = exist;
       const kw1 = nodejieba.extract(title, topN);
       const kw2 = nodejieba.extract(summary, topN);
 

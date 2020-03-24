@@ -1,9 +1,9 @@
-import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { AuthModule } from '../auth/auth.module';
-import { ViewService } from './view.service';
-import { ViewController } from './view.controller';
-import { View } from './view.entity';
+import {Module} from '@nestjs/common';
+import {TypeOrmModule} from '@nestjs/typeorm';
+import {AuthModule} from '../auth/auth.module';
+import {ViewService} from './view.service';
+import {ViewController} from './view.controller';
+import {View} from './view.entity';
 
 @Module({
   imports: [TypeOrmModule.forFeature([View]), AuthModule],
@@ -11,4 +11,5 @@ import { View } from './view.entity';
   providers: [ViewService],
   controllers: [ViewController],
 })
-export class ViewModule {}
+export class ViewModule {
+}

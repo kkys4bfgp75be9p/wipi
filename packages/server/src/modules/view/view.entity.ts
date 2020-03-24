@@ -14,13 +14,13 @@ export class View {
   @Column()
   ip: string;
 
-  @Column({ type: 'text', default: null })
+  @Column({type: 'text', default: null})
   userAgent: string;
 
-  @Column({ type: 'text', default: null })
+  @Column({type: 'text', default: null})
   url: string;
 
-  @Column({ default: 1 })
+  @Column({default: 1})
   count: number; // 同一 userAgent ，同一 url 的访问量
 
   @CreateDateColumn({

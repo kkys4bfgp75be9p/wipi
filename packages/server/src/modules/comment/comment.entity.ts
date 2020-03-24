@@ -17,31 +17,31 @@ export class Comment {
   @Column()
   email: string; // 联系方式
 
-  @Column({ type: 'mediumtext', default: null, charset: 'utf8mb4' }) // 评论内容
+  @Column({type: 'mediumtext', default: null, charset: 'utf8mb4'}) // 评论内容
   content: string;
 
-  @Column({ type: 'mediumtext', default: null, charset: 'utf8mb4' }) // 评论内容
+  @Column({type: 'mediumtext', default: null, charset: 'utf8mb4'}) // 评论内容
   html: string;
 
-  @Column({ type: 'boolean', default: false })
+  @Column({type: 'boolean', default: false})
   pass: boolean; // 是否审核通过
 
-  @Column({ type: 'mediumtext', default: null, charset: 'utf8mb4' })
+  @Column({type: 'mediumtext', default: null, charset: 'utf8mb4'})
   userAgent: string;
 
   @Column()
   hostId: string; // 关联文章或页面 id
 
-  @Column({ type: 'boolean', default: false })
+  @Column({type: 'boolean', default: false})
   isHostInPage: boolean; // 是否评论动态页面
 
-  @Column({ default: null })
+  @Column({default: null})
   parentCommentId: string; // 父级评论 id
 
-  @Column({ default: null })
+  @Column({default: null})
   replyUserName: string; // 回复评论用户名
 
-  @Column({ default: null })
+  @Column({default: null})
   replyUserEmail: string; // 回复评论邮箱
 
   @CreateDateColumn({

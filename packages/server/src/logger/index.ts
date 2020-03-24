@@ -1,6 +1,6 @@
 import * as log4js from 'log4js';
 import * as fs from 'fs-extra';
-import { join } from 'path';
+import {join} from 'path';
 
 const LOG_DIR_NAME = '../../logs';
 
@@ -37,9 +37,9 @@ log4js.configure({
     },
   },
   categories: {
-    default: { appenders: ['request'], level: 'info' },
-    response: { appenders: ['response'], level: 'info' },
-    error: { appenders: ['error'], level: 'info' },
+    default: {appenders: ['request'], level: 'info'},
+    response: {appenders: ['response'], level: 'info'},
+    error: {appenders: ['error'], level: 'info'},
   },
 } as any);
 

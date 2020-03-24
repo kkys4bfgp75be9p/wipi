@@ -11,14 +11,15 @@ import {
   Body,
   UseGuards,
 } from '@nestjs/common';
-import { JwtAuthGuard } from '../auth/jwt-auth.guard';
-import { RolesGuard, Roles } from '../auth/roles.guard';
-import { PageService } from './page.service';
+import {JwtAuthGuard} from '../auth/jwt-auth.guard';
+import {RolesGuard, Roles} from '../auth/roles.guard';
+import {PageService} from './page.service';
 
 @Controller('page')
 @UseGuards(RolesGuard)
 export class PageController {
-  constructor(private readonly pageService: PageService) {}
+  constructor(private readonly pageService: PageService) {
+  }
 
   /**
    * 创建页面

@@ -1,9 +1,9 @@
-import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { UserService } from '../user/user.service';
-import { User } from '../user/user.entity';
-import { Setting } from './setting.entity';
+import {Injectable, HttpException, HttpStatus} from '@nestjs/common';
+import {InjectRepository} from '@nestjs/typeorm';
+import {Repository} from 'typeorm';
+import {UserService} from '../user/user.service';
+import {User} from '../user/user.entity';
+import {Setting} from './setting.entity';
 
 @Injectable()
 export class SettingService {
@@ -11,7 +11,8 @@ export class SettingService {
     @InjectRepository(Setting)
     private readonly settingRepository: Repository<Setting>,
     private readonly userService: UserService
-  ) {}
+  ) {
+  }
 
   /**
    *

@@ -1,30 +1,31 @@
-import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { Page } from './page.entity';
-import { marked } from '../article/markdown.util';
+import {Injectable, HttpException, HttpStatus} from '@nestjs/common';
+import {InjectRepository} from '@nestjs/typeorm';
+import {Repository} from 'typeorm';
+import {Page} from './page.entity';
+import {marked} from '../article/markdown.util';
 
 @Injectable()
 export class PageService {
   constructor(
     @InjectRepository(Page)
     private readonly pageRepository: Repository<Page>
-  ) {}
+  ) {
+  }
 
   /**
    * 新建页面
    * @param page
    */
   async create(page: Partial<Page>): Promise<Page> {
-    const { name, path } = page;
-    const exist = await this.pageRepository.findOne({ where: { path } });
+    const {name, path} = page;
+    const exist = await this.pageRepository.findOne({where: {path}});
 
     if (exist) {
       throw new HttpException('页面已存在', HttpStatus.BAD_REQUEST);
     }
 
-    let { content } = page;
-    const { html, toc } = content ? marked(content) : { html: null, toc: null };
+    let {content} = page;
+    const {html, toc} = content ? marked(content) : {html: null, toc: null};
     const newPage = await this.pageRepository.create({
       ...page,
       html,
@@ -42,7 +43,7 @@ export class PageService {
       .createQueryBuilder('page')
       .orderBy('publishAt', 'DESC');
 
-    const { page = 1, pageSize = 12, status, ...otherParams } = queryParams;
+    const {page = 1, pageSize = 12, status, ...otherParams} = queryParams;
     query.skip((+page - 1) * +pageSize);
     query.take(+pageSize);
 
@@ -95,8 +96,8 @@ export class PageService {
    */
   async updateById(id, page: Partial<Page>): Promise<Page> {
     const old = await this.pageRepository.findOne(id);
-    let { content, status } = page;
-    const { html, toc } = content ? marked(content) : old;
+    let {content, status} = page;
+    const {html, toc} = content ? marked(content) : old;
 
     const newPage = {
       ...page,

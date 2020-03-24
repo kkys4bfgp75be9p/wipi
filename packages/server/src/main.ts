@@ -1,10 +1,10 @@
-import { NestFactory } from '@nestjs/core';
+import {NestFactory} from '@nestjs/core';
 import * as rateLimit from 'express-rate-limit';
 import * as compression from 'compression';
 import * as helmet from 'helmet';
-import { TransformInterceptor } from './interceptors/transform.interceptor';
-import { HttpExceptionFilter } from './filters/http-exception.filter';
-import { AppModule } from './app.module';
+import {TransformInterceptor} from './interceptors/transform.interceptor';
+import {HttpExceptionFilter} from './filters/http-exception.filter';
+import {AppModule} from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
