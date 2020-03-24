@@ -1,0 +1,17 @@
+version: '3.3'
+
+services:
+  db:
+    image: mysql:5.7
+    volumes:
+      - db_data:/data/mysql
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=wipi
+      # So you don't have to use root, but you can if you like
+      - MYSQL_USER=root
+    ports:
+      - 3306:3306
+volumes:
+  db_data:

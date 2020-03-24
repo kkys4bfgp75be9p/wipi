@@ -11,4 +11,5 @@ export default {
     database: process.env.DB_NAME || 'wipi',
     charset: process.env.DB_CHARSET || 'utf8mb4',
   },
+  port: process.env.PORT || 4000
 };

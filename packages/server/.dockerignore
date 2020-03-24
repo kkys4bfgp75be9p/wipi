@@ -1,0 +1,5 @@
+dist/
+logs/
+test/
+node_modules/
+.git/

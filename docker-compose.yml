@@ -1,0 +1,32 @@
+version: '3.3'
+services:
+  wipi:
+    image: wipi-api:latest
+    environment:
+      - NODE_ENV=production
+      - PORT=4000
+      - ADMIN_NAME=admin
+      - ADMIN_PW=admin
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_USERNAME=root
+      - DB_PW=root
+      - DB_NAME0wipi
+      - DB_CHARSET=utf8mb4
+    links:
+      - db
+    ports:
+      - 4000:4000
+
+  db:
+    image: mysql:5.7
+    volumes:
+      - ~/db/mysql:/var/lib/mysql
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=wipi
+      # So you don't have to use root, but you can if you like
+      - MYSQL_USER=root
+    ports:
+      - 3306:3306
